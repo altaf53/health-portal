@@ -1,0 +1,6 @@
+{
+	"name" : "online-portal",
+	"short_name" : "online-portal",
+	"description" : "abc",
+	"start_url" : "http://sieshealthportal.herokuapp.com/"
+}
