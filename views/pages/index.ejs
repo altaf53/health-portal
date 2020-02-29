@@ -7,12 +7,14 @@
     <title><%= title %></title>
     <%- include ('../partials/links') -%>
     <link rel="stylesheet" href="/css/forumpage.css">
+    <link href="/css/blog.css" rel="stylesheet">
 </head>
 <body>
     <!--  -->
     <div id="container">
         <%- include("../partials/nav") -%>
         <div id="main">
+           
             <div class="sidebar">
                 <ul id="sidebarul">
                     <h3 id="username">Username</h3>
@@ -24,6 +26,8 @@
                 <button class="searchbutton">Ask A Question</button>
             </div>
             <div class="maincontent">
+                <%- include("./blog") -%>
+                <!--
                 <div id="qna">
                     <input type="text" name="search" id="searchbar" placeholder="Search something...">
                     <button class="searchbutton">Search</button>
@@ -51,7 +55,7 @@
                     <br><br><br><br><br><br><br><br><br><br><br>
                     <br><br><br><br><br><br><br><br><br><br><br>
                 </div>
-            </div>
+            </div> -->
         </div>
     </div>
     
