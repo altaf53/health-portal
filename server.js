@@ -53,18 +53,7 @@ app.get('/login', function (req, res) {
     res.render('pages/login');
 });
 
-app.post('/register', function (req, res) {
-    console.log(req.body);
-    var user = new User({
-        name: req.body.name,
-        emailId: req.body.emailId,
-        mobileNo: req.body.mobileNo,
-        tags: req.body.tags,
-        diagnosedWith: req.body.diagnosedWith
-    });
-    user.save();
-    res.redirect("/");
-});
+
 app.get('/register', function (req, res) {
     // res.redirect('/');
     res.render('pages/register');
@@ -83,7 +72,7 @@ app.get('/blog', function (req, res) {
 
 
 // post for blog entry
-app.post('/post_blog', urlencodedParser, function (req, res) {
+app.post('/post_blog', function (req, res) {
     try {
         console.log(req.body.title);
         console.log(' ');
@@ -97,6 +86,25 @@ app.post('/post_blog', urlencodedParser, function (req, res) {
     }
 });
 
+//post for reister
+app.post('/register_user', function (req, res) {
+    var name = req.body.user_name;
+    console.log(name);
+    try {
+        var user = new User({
+            name: req.body.user_name,
+            emailId: req.body.u_email_id,
+            mobileNo: req.body.mobileno,
+            tags: req.body.tags,
+            diagnosedWith: req.body.diagnosed
+        });
+        user.save();
+        res.redirect("/");
+    } catch (error) {
+        console.log(error);
+    }
+    
+});
 
 app.listen(port, function () {
     console.log('Listening at port 3000');

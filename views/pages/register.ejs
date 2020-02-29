@@ -12,14 +12,17 @@
 <body>
     <script>
         $(document).ready(function(){
-            $("#postblog").on('click',function(e){
+            $("#register_user").on('click',function(e){
                 
                 e.preventDefault();
-                let title = $("#title").val();
-                let description = $("#description").val();
-                let tag = $("#tag").val();
-                let url = "/post_blog"
-                $.post(url,{title:title, description:description, tag:tag}).done(function(data){
+                let user_name = $("#user_name").val();
+                let u_email_id = $("#u_email_id").val();
+                let userpassword = $("#userpassword").val();
+                let mobileno = $("#mobileno").val();
+                let tags = $("#tags").val();
+                let diagnosed = $("#diagnosed").val();
+                let url = "/register_user"
+                $.post(url,{user_name:user_name, u_email_id:u_email_id, userpassword:userpassword, mobileno:mobileno, tags:tags, diagnosed:diagnosed}).done(function(data){
                     if(data.login == "Login Successful"){
                         let geturl = data.redirect;
                         $(location).attr('href',geturl);
@@ -48,7 +51,7 @@
             <label for="username">Username</label>
             <input type="text" name="username" placeholder="Enter a username..." id="user_name">
             <label for="useremail">Your email</label>
-            <input type="email" name="email" id="useremail" placeholder="Enter Your email-id" id="u_email_id">
+            <input type="email" name="email" placeholder="Enter Your email-id" id="u_email_id">
             <label for="userpassword">Password</label>
             <input type="password" name="userpassword" id="userpassword" placeholder="Enter Your password">
             <label for="confirmpassword">Confirm Password</label>
