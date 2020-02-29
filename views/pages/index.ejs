@@ -11,21 +11,22 @@
 <body>
     <!--  -->
     <div id="container">
-        <%- include("../partials/header") -%>
         <%- include("../partials/nav") -%>
         <div id="main">
             <div class="sidebar">
                 <ul id="sidebarul">
+                    <h3 id="username">Username</h3>
                     <li><a href="">Home</a></li>
-                    <li><a href="">Hot Topics</a></li>
-                    <li><a href="">Blogs</a></li>
                     <li><a href="">Courses</a></li>
+                    <li><a href="">Track Your Health</a></li>
+                    <li><a href="">Tags</a></li>
                 </ul>
+                <button class="searchbutton">Ask A Question</button>
             </div>
             <div class="maincontent">
                 <div id="qna">
-                    <input type="text" name="search" placeholder="Search something...">
-                    <button id="askquestion">Ask A Question</button>
+                    <input type="text" name="search" id="searchbar" placeholder="Search something...">
+                    <button class="searchbutton">Search</button>
                 </div>
                 <div id="results">
                     <div class="question paddeddivs">
