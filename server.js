@@ -58,7 +58,6 @@ app.get('/blog', function (req, res) {
     // res.redirect('/');
     res.render('pages/blog', { title: "Online-Portal" });
 });
-<<<<<<< HEAD
 
 
 
@@ -84,8 +83,6 @@ app.post('/post_blog', urlencodedParser, function (req, res) {
 });
 
 
-=======
->>>>>>> 5cbfb174b7d2fce280a3d236c78d70b11a080652
 app.listen(port, function () {
     console.log('Listening at port 3000');
 });
