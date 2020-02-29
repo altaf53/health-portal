@@ -1,0 +1,105 @@
+
+<div class="container-fluid jumbotron">
+    <h3 style="text-align: center;">Track Your Health</h3>
+    <form>
+        <!-- page1 -->
+    <div id="page1">
+        <div class="form-group">
+            <h5 class="headers1">Enter Current Year:    
+            </h5>
+            
+            <input type="text" class="form-control col-3"  name="year">
+            <h5 class="headers1">Enter Today's Date:    
+            </h5>
+            
+            <input type="text" class="form-control col-3"  name="date">
+            <h5 class="headers1">Enter Day:    
+            </h5>
+            
+            <input type="text" class="form-control col-3"  name="day">
+            <h5 class="headers1">Enter Current Month:    
+            </h5>
+            
+            <input type="text" class="form-control col-3"  name="month">
+
+        </div>
+        
+        <div class="form-group">
+        
+            <button class="searchbutton" id="next" >Next</button>
+
+        </div>
+    </div>
+    <!-- page 2 -->
+    <div id="page2" style="display: none;">
+        <div class="form-group">
+            <h5 class="headers1">Guess The Objects:  
+            </h5>
+            
+               
+            
+            <div id="hider">
+                <img class="img1" src="images/ball.png">
+                <img class="img1" src="images/cup.png">
+                <img class="img1" src="images/pen.jpg">
+                <button class="searchbutton" id="prev" style="display: none;" type="button" >Preview</button>
+
+            </div>
+            
+            <h5 class="headers1">Object 1:    
+            </h5>
+            
+            <input type="text" class="form-control col-3"  name="obj1">
+            <h5 class="headers1">Object 2:    
+            </h5>
+            
+            <input type="text" class="form-control col-3"  name="obj2">
+            <h5 class="headers1">Object 3:    
+            </h5>
+            
+            <input type="text" class="form-control col-3"  name="obj3">
+
+        </div>
+        
+        <div class="form-group">
+        
+            <button class="searchbutton"  type="button">Done</button>
+
+        </div>
+    </div>
+    
+   
+    </div>
+</form>
+
+</div>
+<script>
+    // $( "#hider" ).click(function() {
+    //   $( "span:last-child" ).hide( "fast", function() {
+    //     // Use arguments.callee so we don't need a named function
+    //     $( this ).prev().hide( "fast", arguments.callee );
+    //   });
+    // });
+  
+    $( "#prev" ).click(function() {
+    $( ".img1" ).show( 2000 );
+    $("#prev").hide(2000);
+   
+
+    });
+
+    $('#next').click(function() { 
+    $(this).parents('#page1').hide();
+    $(this).parents('#page1').next('#page2').show();
+    setInterval(function(){
+        hideimgs();
+    }, 3000);
+    function hideimgs(){
+        $( ".img1" ).hide( 2000 );
+        $("#prev").show(2000);
+    }
+    return false;
+    }); 
+
+
+    </script>
