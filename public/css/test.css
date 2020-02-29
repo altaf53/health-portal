@@ -1,0 +1,12 @@
+.img1{
+    width: 60%;
+    max-height: 250px;
+}
+#hidimages{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+}
+#answerimages{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+}

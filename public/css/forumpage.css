@@ -31,6 +31,7 @@
 }
 #sidebarul li.active a, #sidebarul li:hover a{
     color: var(--primary-dark-color);
+    cursor: pointer;
 }
 #qna{
     border-bottom: 1px solid #ededed;
@@ -39,6 +40,7 @@
     padding: 5px 10%;
     z-index: 0;
     position: sticky;
+    top: 0;
     text-align: center;
 }
 #qna>*{

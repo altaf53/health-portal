@@ -8,23 +8,9 @@
     <%- include ('../partials/links') -%>
     <link rel="stylesheet" href="/css/forumpage.css">
     <link href="/css/blog.css" rel="stylesheet">
+    <link href="/css/test.css" rel="stylesheet">
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 </head>
-
-<!-- Route for blog -->
-<script type="text/javascript">
-    $(function() {
-        $('#ask').click(function() {
-                $.ajax({
-                    url: '/blog',
-                    type: 'GET',
-                    cache: false,
-                }).done(function(result){
-                    $('#maincontent').html(result);
-                });
-        });
-    });
-</script>
-
 <body>
     <!--  -->
     <div id="container">
@@ -34,48 +20,18 @@
             <div class="sidebar">
                 <ul id="sidebarul">
                     <h3 id="username">Username</h3>
-                    <li class="active"><a href="">Home</a></li>
-                    <li><a href="">Courses</a></li>
-                    <li><a href="">Track Your Health</a></li>
-                    <li><a href="">Tags</a></li>
+                    <li><a id="homepage">Home</a></li>
+                    <li><a id="courses">Courses</a></li>
+                    <li><a id="alzheimer">Track Your Health</a></li>
+                    <li><a id="tags">Tags</a></li>
+                    <li><a id="chat">Chat</a></li>
                 </ul>
-                <button class="searchbutton" id="ask" >Ask A Question</button>
+                <button class="searchbutton" id="Dblog" >Ask A Question</button>
             </div>
             <div class="maincontent" id="maincontent">
-               <%- include("./Dblog") -%> 
-                
-                <!-- <div id="qna">
-                    <input type="text" name="search" id="searchbar" placeholder="Search something...">
-                    <button class="searchbutton">Search</button>
-                </div>
-                <div id="results">
-                    <div class="question paddeddivs">
-                        <p class="questionheader">Question 1</p>
-                        <p class="questiondesc">Question description Lorem ipsum dolor sit amet consectetur adipisicing elit. Illum </p>
-                        <p class="tags"><span class="tag">tag1</span><span class="tag">tag2</span></p>
-                        <p class="topcomment">The top comment of the question</p>
-                    </div>
-                    <div class="question paddeddivs">
-                        <p class="questionheader">Question 1</p>
-                        <p class="questiondesc">Question description Lorem ipsum dolor sit amet consectetur adipisicing elit. Illum </p>
-                        <p class="tags"><span class="tag">tag1</span><span class="tag">tag2</span></p>
-                        <p class="topcomment">The top comment of the question</p>
-                    </div>
-                    <div class="question paddeddivs">
-                        <p class="questionheader">Question 1</p>
-                        <p class="questiondesc">Question description Lorem ipsum dolor sit amet consectetur adipisicing elit. Illum </p>
-                        <p class="tags"><span class="tag">tag1</span><span class="tag">tag2</span></p>
-                        <p class="topcomment">The top comment of the question</p>
-                    </div>
-                    <br><br><br><br><br><br><br><br><br><br><br>
-                    <br><br><br><br><br><br><br><br><br><br><br>
-                    <br><br><br><br><br><br><br><br><br><br><br>
-                </div>
-            </div> --> 
+                <%- include("./homepage") -%>
         </div>
     </div>
-    
-
-    <script src="/js/forumpage.js"></script>
+    <script src="/js/index.js"></script>
 </body>
 </html>
