@@ -8,20 +8,20 @@
         <h5 class="headers1">Title:    
         </h5>
         <p class="subhead1">Be specific and imagine you're Writing for another person to understand</p>
-        <input type="text" class="form-control" placeholder=" e.g. How One can get ride of obesity!" name="Title">
+        <input type="text" class="form-control" placeholder=" e.g. How One can get rid of obesity!" id="title" name="title">
     </div>
     <div class="form-group">
         <h5 class="headers1">Description:    
         </h5>
         <p class="subhead1">Include all the information someone would need to understand</p>
-        <textarea  style="resize: none;"class="form-control" placeholder="Enter description..." name="Description" rows="10"></textarea>
+        <textarea  style="resize: none;"class="form-control" placeholder="Enter description..." title="description" name="description" rows="10" id="description"></textarea>
 
     </div>
     <div class="form-group">
         <h5 class="headers1">Tags:    
         </h5>
         <p class="subhead1">Add a tag to describe what your Article is about</p>
-        <input class="form-control col-lg-3 col-md-6 col-sm-6" placeholder="e.g. (obesity, alzheimer)" name="Tags" id="tagsinput" >
+        <input class="form-control col-lg-3 col-md-6 col-sm-6" placeholder="e.g. (obesity, alzheimer)" name="tagsinput" id="tagsinput" >
         <div id="taglist" class="col-lg-3 col-md-6 col-sm-6">
             <p class="tagsname">Alzheimer</p>
             <p class="tagsname">Obesity</p>
@@ -35,7 +35,7 @@
     </div>
     <div class="form-group">
        
-        <button class="searchbutton" type="submit" >Post</button>
+        <button class="searchbutton" type="submit" id="postarticle" >Post</button>
 
     </div>
 </form>
@@ -43,7 +43,7 @@
 </div>
 <script>
     function settag(tagvalue){
-        var str = '<div class="alert alert-warning alert-dismissible fade show tagspan" role="alert"><span>'+tagvalue+'</span><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>';
+        var str = '<div class="alert alert-warning alert-dismissible fade show tagspan" role="alert" ><span id="tagid">'+tagvalue+'</span><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>';
         $('#selectedtags').append(str);
     }
 
@@ -56,5 +56,36 @@
         $('#tagsinput').val(v);
         $('#taglist').removeClass('show');
         settag(v);
+    });
+</script>
+<script>
+    $(document).ready(function(){
+        $("#postarticle").on('click',function(e){
+            e.preventDefault();
+            let title = $("#title").val();
+            let description = $("#description").val();
+            let tags = "";
+            $('#selectedtags div').each(function(){
+                tags += $(this).find('#tagid').text() + ", ";
+            });
+            tags = tags.substring(0, tags.length - 2);
+            console.log(tags);
+
+            let url = "/post_blog";
+            $.post(url,{title:title, description:description, tags:tags}).done(function(data){
+                if(data=="success"){
+                    swal({
+                            title: "Yayy Posted",
+                            text: "",
+                            icon: "success",
+                            }).then(function(){
+                                window.location = '/';
+                            });
+                }
+                else{
+                    
+                }
+            });
+        });
     });
 </script>

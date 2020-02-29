@@ -22,6 +22,10 @@ const blogSchema = new mongoose.Schema({
   userId: {
     type: mongoose.SchemaTypes.ObjectId,
     ref: 'User'
+  },
+  user_type: {
+    type: String,
+    enum: ['user', 'doctor']
   }
 });
 

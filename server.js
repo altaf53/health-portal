@@ -15,6 +15,7 @@ const crypto = require('crypto');
 const mongoose = require('mongoose');
 const User = require('./models/User');
 const TestScore = require('./models/TestScore');
+const Blog = require('./models/Blog');
 const dotenv = require('dotenv').config();
 const saltRounds = 10;
 var datetime = new Date();
@@ -38,11 +39,15 @@ var MemoryStore = require('memorystore')(session)
 //setting view engine to ejs, to able to render ejs files
 app.set('view engine', 'ejs');
 app.use(express.static(__dirname + "/views"));
+// app.use(express.cookieParser());
 app.use(session({
-    secret: 'keyboard cat',
+    cookie: { maxAge: 86400000 },
+    store: new MemoryStore({
+      checkPeriod: 86400000 // prune expired entries every 24h
+    }),
     resave: false,
-    saveUninitialized: true,
-    cookie: { secure: true }
+    saveUninitialized: false,
+    secret: 'sies docs'
   }))
 //including public folder for accessing files present in public folder
 app.use(express.static(__dirname + "/public"));
@@ -102,24 +107,7 @@ app.get('/alzheimer', function (req, res) {
 
 
 
-// post for blog entry
-app.post('/post_blog', function (req, res) {
-    try {
-        var user = new User({
-            title: req.body.title,
-            tags: req.body.tag,
-            description: req.body.description,
-            createdBy: s,
-            createdAt: s,
-            userId: s
-        });
-        user.save();
-        res.redirect("/");
-        
-    } catch (error) {
-        console.log(error);
-    }
-});
+
 
 //post for register
 app.post('/register_user', function (req, res) {
@@ -132,8 +120,9 @@ app.post('/register_user', function (req, res) {
             emailId: req.body.u_email_id,
             mobileNo: req.body.mobileno,
             tags: req.body.tags,
-            diagnosedWith: req.body.diagnosed,
-            password: hash
+            diagonsedWith: req.body.diagnosed,
+            password: hash,
+            user_type: req.body.user_type
         });
         user.save();
         res.send("succes");
@@ -155,9 +144,12 @@ app.post('/login_submit', function (req, res) {
             }
             
             var compare = bcrypt.compareSync(req.body.userpassword, result[0].password);
+            
             if(compare == true){
-
-                // req.session.user_type = result[0].user_type;
+                console.log(result[0].user_type)
+                
+                
+                req.session.user_type = result[0].user_type;
                 req.session.userid = result[0]._id.toString();
                 req.session.email_id = result[0].email_id;
                 req.session.username = result[0].name;
@@ -167,6 +159,7 @@ app.post('/login_submit', function (req, res) {
                 req.session.tags = result[0].tags;
                 res.send("Login Successful")
             }
+            
         });
     } catch (error) {
         console.log(error);
@@ -187,6 +180,25 @@ app.post('/point_submit', function (req, res) {
     }
 });
 
+// post for blog entry
+app.post('/post_blog', function (req, res) {
+    try {
+        console.log("helo " + req.session.user_type)
+        var blog = new Blog({
+            title: req.body.title,
+            tags: req.body.tags,
+            description: req.body.description,
+            createdBy: req.session.username,
+            userId: req.session.userid,
+            user_type:req.session.user_type
+        });
+        blog.save();
+        res.send("success");
+        
+    } catch (error) {
+        console.log(error);
+    }
+});
 app.listen(port, function () {
     console.log('Listening at port 3000');
 });
