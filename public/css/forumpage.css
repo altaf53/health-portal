@@ -53,12 +53,34 @@
 }
 .questioncard{
     padding: 10px;
+    cursor: pointer;
     margin: 0 2%;
-    border-top: 1px solid #d3d3d3;
+    border-top: 1px solid var(--border-light-color);
 }
 .questioncard:first-child{
     border: 0;
 }
-.questioncard p{
-    margin: 5px;
+.questioncard:hover a{
+    color: black;
+}
+.questioncard:hover .questionheader{
+    color: var(--primary-dark-color);
+    text-decoration: underline;
+}
+.questionheader{
+    font-size: 1.1em;
+    margin: 0;
+}
+.questiondesc{
+    font-size: 0.9em;
+    max-width: 700px;
+}
+.tag{
+    padding: 3px 10px;
+    font-size: 0.9em;
+    background: linear-gradient(to top right, var(--primary-dark-color), var(--button-left-color1));
+    color: var(--primary-light-color);
+    border-radius: 5px;
+    border: 1px solid var(--button-left-color2);
+    margin-right: 7px;
 }

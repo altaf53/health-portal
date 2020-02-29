@@ -15,5 +15,13 @@ $(document).ready(function(){
             $('#maincontent').html(result);
         });
     });
-    
+    $('.questioncard a').click(function(){
+        $.ajax({
+            url: '/question',
+            type: 'GET',
+            cache: false,
+        }).done(function(result){
+            $('#maincontent').html(result);
+        });
+    });
 });
