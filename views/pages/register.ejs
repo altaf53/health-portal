@@ -109,9 +109,7 @@
         $(document).ready(function(){
             $("#register_").on('click',function(e){
                 e.preventDefault();
-                alert("hhabj");
                 if(validateData() == true){
-                    console.log("errro");
                     
                     let user_name = $("#user_name").val();
                     let u_email_id = $("#u_email_id").val();
@@ -120,6 +118,7 @@
                     let tags = $("#tags").val();
                     let diagnosed = $("#diagnosed").val();
                     let user_type = $("#accounttype").val();
+                    alert(user_type);
                     let url = "/register_user"
                     $.post(url,{user_name:user_name, u_email_id:u_email_id, userpassword:userpassword, mobileno:mobileno, tags:tags, diagnosed:diagnosed, user_type:user_type}).done(function(data){
                         if(data == "succes"){

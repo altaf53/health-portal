@@ -34,8 +34,7 @@ const userSchema = new Schema({
     type: String
   },
   user_type: {
-    type: String,
-    enum: ['user', 'doctor']
+    type: String
   },
   field: {
     type: String
