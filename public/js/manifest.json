@@ -5,5 +5,13 @@
 	"name" : "online-portal",
 	"short_name" : "online",
 	"description" : "abc",
-	"start_url" : "http://sieshealthportal.herokuapp.com"
+	"start_url" : "/",
+	"icons": [
+		
+		{
+		  "src": "/images/pwa.png",
+		  "type": "image/png",
+		  "sizes": "512x512"
+		}
+	  ]
 }

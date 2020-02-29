@@ -7,62 +7,62 @@
         <div class="form-group">
             <h5 class="headers1">Q.1) Do you get anxious if you have to speak or perform in any way in front of a group of strangers?</h5>
             <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio"  id="Q1.1" value="Yes" name="Q1">
+                <input class="form-check-input" type="radio" class="q1"  id="Q1.1" value="0" name="Q1">
                 <label class="form-check-label" for="Q1.1">Yes</label>
             </div>
             <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio"  id="Q1.2" value="No" name="Q1">
+                <input class="form-check-input" type="radio" class="q1" id="Q1.2" value="4" name="Q1">
                 <label class="form-check-label" for="Q1.2">No</label>
             </div>
         </div>
         <div class="form-group">
             <h5 class="headers1">Q.2) Are you easily hurt by what other people do or say to you?</h5>
             <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio"  id="Q2.1" value="Yes" name="Q2">
+                <input class="form-check-input" type="radio" class="q2" id="Q2.1" value="0" name="Q2">
                 <label class="form-check-label" for="Q2.1">Yes</label>
             </div>
             <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio"  id="Q2.2" value="No" name="Q2">
+                <input class="form-check-input" type="radio" class="q2" id="Q2.2" value="4" name="Q2">
                 <label class="form-check-label" for="Q2.2">No</label>
             </div>
         </div>
         <div class="form-group">
             <h5 class="headers1">Q.3) Do you keep in the background on social occasions?</h5>
             <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio"  id="Q3.1" value="Yes" name="Q3">
+                <input class="form-check-input" type="radio" class="q3" id="Q3.1" value="0" name="Q3">
                 <label class="form-check-label" for="Q3.1">Yes</label>
             </div>
             <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio"  id="Q3.2" value="No" name="Q3">
+                <input class="form-check-input" type="radio" class="q3" id="Q3.2" value="4" name="Q3">
                 <label class="form-check-label" for="Q3.2">No</label>
             </div>
         </div>
         <div class="form-group">
-            <h5 class="headers1">Q.4) Do you keep in the background on social occasions?</h5>
+            <h5 class="headers1">Q.4) Do you feel uncomfortable when you meet new people?</h5>
             <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio"  id="Q4.1" value="Yes" name="Q4">
+                <input class="form-check-input" type="radio" class="q4" id="Q4.1" value="0" name="Q4">
                 <label class="form-check-label" for="Q4.1">Yes</label>
             </div>
             <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio"  id="Q4.2" value="No" name="Q4">
+                <input class="form-check-input" type="radio" class="q4" id="Q4.2" value="4" name="Q4">
                 <label class="form-check-label" for="Q4.2">No</label>
             </div>
         </div>
         <div class="form-group">
-            <h5 class="headers1">Q.5) Do you keep in the background on social occasions?</h5>
+            <h5 class="headers1">Q.5) Do you get discouraged easily, e.g., by failure or criticism?</h5>
             <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio"  id="Q5.1" value="Yes" name="Q5">
+                <input class="form-check-input" type="radio" class="q5" id="Q5.1" value="0" name="Q5">
                 <label class="form-check-label" for="Q5.1">Yes</label>
             </div>
             <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio"  id="Q5.2" value="No" name="Q5">
+                <input class="form-check-input" type="radio" class="q5" id="Q5.2" value="4" name="Q5">
                 <label class="form-check-label" for="Q5.2">No</label>
             </div>
         </div>
 
            
         <div class="form-group">
-            <button class="searchbutton" id="next" >Next</button>
+            <button class="searchbutton" id="done" type="button" onclick="anval()">Done</button>
         </div>
     </div>
 </div>
@@ -70,53 +70,40 @@
 
 </div>
 <script>
-    var counter = 0;
-    $( "#prev" ).click(function() {
-        counter = 1;
-        $( ".img1" ).show(1000, function(){
-            setTimeout(function(){
-                hideimgs();
-            }, 1000);
-        });
-        $("#prev").hide(1000);
-    });
-    $('#next').click(function() { 
-    $(this).parents('#page1').hide();
-    $(this).parents('#page1').next('#page2').show();
-    setTimeout(function(){
-        hideimgs();
-    }, 3000);
-    return false;
-    }); 
-    function hideimgs(){
-        $( ".img1" ).hide( 1000 );
-        if(counter == 0){
-            $("#prev").show(1000);
-        }
+    function anval(){
+        var q1 = parseInt($('input[name="Q1"]:checked').val());
+        var q2 = parseInt($('input[name="Q2"]:checked').val());
+        var q3 = parseInt($('input[name="Q3"]:checked').val());
+        var q4 = parseInt($('input[name="Q4"]:checked').val());
+        var q5 = parseInt($('input[name="Q5"]:checked').val());
         
-    }
+        if(isNaN(q1) || isNaN(q2) || isNaN(q3) || isNaN(q4) || isNaN(q5) ){
+            swal("Some fields are empty!");
+        }
+        else{
+        var score = q1+q2+q3+q4+q5;
 
-    function givepoints(){
-        var points = 0;
-        var d = new Date();
-        if($('#year').val() == d.getFullYear()){
-            points += 2;
+        if(score <= 5){
+            str = "You have very high anxiety!";
+            strtype = "warning";
         }
-        if(parseInt($('#month').val()) == (d.getMonth()+1)){
-            points += 2;
+        else if(score <= 10){
+            str = "You have high anxiety!";
+            strtype = "error";
         }
-        if(parseInt($('#date').val()) == d.getDate()){
-            points += 5;
+        else if(score <= 15){
+            str = "You have anxiety!";
+            strtype = "error";
         }
-        if($('#object1').val().toLowerCase() == "ball"){
-            points += 2;
+        else if(score >= 16){
+            str = "You have very less anxiety!";
+            strtype = "success";
         }
-        if($('#object2').val().toLowerCase() == "cup"){
-            points += 2;
+        swal("Your Score: "+score+'/20', str, strtype); 
+        // let url = "/point_submit";
+        // $.post(url,{points:bmi}).done(function(data){
+            
+        // });
         }
-        if($('#object3').val().toLowerCase() == "pen"){
-            points += 2;
-        }
-        swal("You completed the test", "Your points "+points+"/15", "success");
     }
-    </script>
+</script>

@@ -51,14 +51,14 @@
 #searchbar{
     width: 500px;
 }
-.question{
+.questioncard{
     padding: 10px;
     margin: 0 2%;
     border-top: 1px solid #d3d3d3;
 }
-.question:first-child{
+.questioncard:first-child{
     border: 0;
 }
-.question p{
+.questioncard p{
     margin: 5px;
 }
