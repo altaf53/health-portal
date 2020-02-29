@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <%- include ('../partials/links') -%>
+    <link rel="stylesheet" href="/css/login.css">
+</head>
+<body>
+    <div>
+        <form action="" class="forms">
+            <h2>Register</h2>
+            <label for="username">Username</label>
+            <input type="text" name="username" placeholder="Enter a username...">
+            <label for="useremail">Your email</label>
+            <input type="email" name="email" id="useremail" placeholder="Enter Your email-id">
+            <label for="userpassword">Password</label>
+            <input type="password" name="userpassword" placeholder="Enter Your password">
+            <p>
+                <input type="checkbox" id="showpass">
+                <label for="showpass">Show Password</label>
+            </p>
+            <input type="submit" class="searchbutton" value="Register">
+        </form>
+    </div>
+</body>
+</html>

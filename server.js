@@ -36,7 +36,14 @@ app.get('/', function (req, res) {
     // res.redirect('/');
     res.render('pages/index',{title:"Online-Portal"});
 });
-
+app.get('/login', function (req, res) {
+    // res.redirect('/');
+    res.render('pages/login');
+});
+app.get('/register', function (req, res) {
+    // res.redirect('/');
+    res.render('pages/register');
+});
 app.listen(port, function () {
     console.log('Listening at port 3000');
   });
