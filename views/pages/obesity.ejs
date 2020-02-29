@@ -5,64 +5,62 @@
     <div id="page1">
         <div class="form-group">
             <h5 class="headers1">Enter Your Age:</h5>
-            
-            <input type="text" class="form-control col-3" placeholder="e.g. 23" id="age" name="age" required>
+            <input type="text" class="form-control col-3" placeholder="e.g. 23" id="age" name="Age">
             <h5 class="headers1">Enter Your Gender:</h5>
             <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="gender" id="gender" value="Male">
+                <input class="form-check-input" type="radio" checked name="Gender" value="Male">
                 <label class="form-check-label" for="male">Male</label>
             </div>
             <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="gender" id="gender" value="Female">
+                <input class="form-check-input" type="radio" name="Gender" value="Female">
                 <label class="form-check-label" for="female">Female</label>
             </div>
-            
             <h5 class="headers1">Enter Your Height (cm):</h5>
-            
-            <input type="text" class="form-control col-3" placeholder="e.g. 180" id="height" name="height" required>
-            <h5 class="headers1">Enter Your Weight (kg):    </h5>
-            <input type="text" class="form-control col-3"   placeholder="e.g. 65" id="weight" name="weight" required>
-
+            <input type="text" class="form-control col-3" placeholder="e.g. 180" id="height" name="Height">
+            <h5 class="headers1">Enter Your Weight (kg):</h5>
+            <input type="text" class="form-control col-3"   placeholder="e.g. 65" id="weight" name="Weight">
         </div>
-        
         <div class="form-group">
-        
-            <button class="searchbutton" id="done" type="button" onclick="xyz()">Done</button>
-
+            <button class="searchbutton" id="done" type="button" onclick="givebmi()">Done</button>
         </div>
     </div>
-    <!-- page 2 -->
-    <!-- <div id="page2" style="display: none;">
-       
-
-        </div>
-        
-        <div class="form-group">
-        
-            <button class="searchbutton"  type="button">Done</button>
-
-        </div>
-    </div>
-    
-   
-    </div> -->
 </form>
-
 </div>
 <script>
-    function xyz(){
-        function validateData(){
-            var flag = true;
-            var user_name = $('#age').val();
-            var gender = $('input[name="gender"]:checked').val();
-            var weight = $('#weight').val();
-            var height = $('#height').val();
+    function givebmi(){
+        var age = $('#age').val();
+        var weight = $('#weight').val();
+        var height = $('#height').val();
+        if(weight == '' || height == '' || age == ''){
+            swal("Some fields are empty!");
         }
-
-    swal("Good job!", "You clicked the button!", "success")
-    
-
-
+        else{
+            var bmi = weight*10000/(height*height);
+        bmi = Math.round(bmi*100)/100;
+        var str = "";
+        var strtype = "";
+        if(bmi <= 18){
+            str = "You are underweight!";
+            strtype = "warning";
+        }
+        else if(bmi <= 24){
+            str = "You are healthy!";
+            strtype = "success";
+        }
+        else if(bmi <= 29){
+            str = "You are a bit overweight!"
+            strtype = "warning";
+        }
+        else if(bmi <= 100){
+            str = "You are Obese...";
+            strtype = "error";
+        }
+        swal("Your BMI: "+bmi, str, strtype);
+        } 
+        let url = "/point_submit";
+        $.post(url,{points:bmi}).done(function(data){
+            
+        });
     }
   
     </script>

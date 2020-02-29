@@ -11,9 +11,9 @@
 
 <body>
    
-    <div>
-        <form  class="forms" name="RegForm" method="POST">
-            <h2>Register</h2>
+    <div id="formdiv">
+        <form  class="forms" name="RegForm" id="registerform">
+            <h2 class="full">Register</h2>
             <label for="username">Username</label>
             <input type="text" name="user_name" placeholder="Enter a username..." id="user_name">
             <label for="useremail">Your email</label>
@@ -25,10 +25,27 @@
             <label for="mobileno">Mobile No.</label>
             <input type="number" name="mobileno" id="mobileno" placeholder="Enter Your mobile no.">
             <label for="tags">Interested topics</label>
-            <input type="text" name="tags" id="tags" placeholder="Enter tags">
+            <input type="text" name="tags" id="tags" placeholder="Enter topics you are interested in" list="taglist">
+            <datalist id="taglist">
+                <option value="Alzheimer">
+                <option value="Obesity">
+                <option value="Anxiety">
+                <option value="Depression">
+            </datalist>
+            <div id="selectedtags" class="full">
+
+            </div>
+            <label for="accounttype">Choose an account type:</label>
+            <select name="accounttype" id="accounttype" onchange="setusertype($(this))">
+                <option value="user" selected>User</option>
+                <option value="doctor">Doctor</option>
+            </select>
             <label for="diagnosed">Diagnosed with</label>
             <input type="text" name="diagnosed" id="diagnosed" placeholder="Enter the disease you are diagnosed with">
-            <input type="submit" class="searchbutton" id="register_" value="Register">
+            <label for="certificate" style="display:none;">Upload Your Certificate</label>
+            <input type="file" name="certificate" id="certificate" style="display:none;">
+            <input type="submit" class="searchbutton full" id="register_" value="Register">
+            
         </form>
     </div>
      <script type="text/javascript">
@@ -42,6 +59,7 @@
             var diagnosed =document.RegForm.diagnosed.value;
              var password = document.RegForm.userpassword.value;
              var password_confirm = document.RegForm.comfirmpassword.value;
+             var v = $('#accounttype').val();
             // var decimal=  /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{8,15}$/;
 
             var check=[];
@@ -66,9 +84,11 @@
             if(tags==""){
                 check.push('Atleast one Tag is Required')  
             }
+            if(v== "user"){
             if(diagnosed==""){
                 check.push('diagnosed Required')
             }
+        }
             
             
             if(check.length > 0){
@@ -88,17 +108,20 @@
     <script>
         $(document).ready(function(){
             $("#register_").on('click',function(e){
+                e.preventDefault();
+                alert("hhabj");
                 if(validateData() == true){
                     console.log("errro");
-                    e.preventDefault();
+                    
                     let user_name = $("#user_name").val();
                     let u_email_id = $("#u_email_id").val();
                     let userpassword = $("#userpassword").val();
                     let mobileno = $("#mobileno").val();
                     let tags = $("#tags").val();
                     let diagnosed = $("#diagnosed").val();
+                    let user_type = $("#accounttype").val();
                     let url = "/register_user"
-                    $.post(url,{user_name:user_name, u_email_id:u_email_id, userpassword:userpassword, mobileno:mobileno, tags:tags, diagnosed:diagnosed}).done(function(data){
+                    $.post(url,{user_name:user_name, u_email_id:u_email_id, userpassword:userpassword, mobileno:mobileno, tags:tags, diagnosed:diagnosed, user_type:user_type}).done(function(data){
                         if(data == "succes"){
                             swal({
                                 title: "Registration Successful!",
@@ -117,9 +140,37 @@
                         }else{}
                     });
                 }else{
-                    e.preventDefault();
+                    e.preventDefault(); 
                     console.log(error);
                 }
+            });
+        });
+            </script>
+            
+    <script>
+        function setusertype(t){
+            var v = t.val();
+            if(v == "user"){
+                $('#diagnosed').show().prev().show();
+                $('#certificate').hide().prev().hide();
+            }
+            else if(v == "doctor"){
+                $('#certificate').show().prev().show();
+                $('#diagnosed').hide().prev().hide();
+            }
+        }
+        $(document).ready(function(){
+            $('#tags').on('input', function(){
+                var v = this.value;
+                if($('#taglist option').filter(function(){
+                    return this.value.toUpperCase() === v.toUpperCase();        
+                }).length){
+                    var str = '<div class="alert alert-warning alert-dismissible fade show tagspan" role="alert"><span>'+v+'</span><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>';
+                    $('#selectedtags').append(str);
+                }
+            });
+            $('#tags').click(function(){
+                $(this).select();
             });
         });
     </script>

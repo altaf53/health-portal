@@ -76,11 +76,24 @@ app.get('/Dblog', function (req, res) {
     // res.redirect('/');
     res.render('pages/Dblog');
 });
-app.get('/alzheimer', function (req, res) {
+app.get('/anxiety', function (req, res) {
+    // res.redirect('/');
+    res.render('pages/anxiety');
+});
+app.get('/tags', function (req, res) {
+    // res.redirect('/');
+    res.render('pages/question');
+});
+
+
+app.get('/obesity', function (req, res) {
     // res.redirect('/');
     res.render('pages/obesity');
 });
-
+app.get('/alzheimer', function (req, res) {
+    // res.redirect('/');
+    res.render('pages/alzheimer');
+});
 
 
 

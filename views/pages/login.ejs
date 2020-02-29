@@ -8,18 +8,19 @@
     <link rel="stylesheet" href="/css/login.css">
 </head>
 <body>
-    <div>
+    <div id="formdiv">
         <form name="loginform" class="forms">
             <h2>Login</h2>
-            <label for="email">User Name</label>
+            <label for="user name">User Name</label>
             <input type="text" id="user_name" placeholder="Enter Your User Name">
-            <label for="password">Password</label>
+            <label for="userpassword">Password</label>
             <input type="password" id="userpassword" name="userpassword" placeholder="Enter Your password">
             <p>
                 <input type="checkbox" id="showpass">
                 <label for="showpass">Show Password</label>
             </p>
-            <input type="submit" id="login" class="searchbutton" value="Login">
+            <input type="submit" class="searchbutton" id="login" value="Login">
+            <a href="./">&#x21E6; Back to Home</a>
         </form>
     </div>
     <script>
@@ -47,6 +48,14 @@
                                 });
                         }
                     });
+                });
+            $('#showpass').on('change', function(){
+                if(this.checked){
+                    $('#userpassword').attr('type', 'text');
+                }
+                else{
+                    $('#userpassword').attr('type', 'password');
+                }
             });
         });
     </script>
