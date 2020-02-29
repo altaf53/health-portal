@@ -13,6 +13,7 @@ const bcrypt = require('bcryptjs');
 var session = require('express-session');
 const crypto = require('crypto');
 const mongoose = require('mongoose');
+const User = require('./models/User');
 const dotenv = require('dotenv').config();
 const saltRounds = 10;
 var datetime = new Date();
@@ -39,7 +40,8 @@ app.use(express.static(__dirname + "/views"));
 
 //including public folder for accessing files present in public folder
 app.use(express.static(__dirname + "/public"));
-var urlencodedParser = bodyParser.urlencoded({ extended: false });
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 
 //Setting the homepage or start page Route
 app.get('/', function (req, res) {
@@ -50,6 +52,19 @@ app.get('/login', function (req, res) {
     // res.redirect('/');
     res.render('pages/login');
 });
+
+app.post('/register', function (req, res) {
+    console.log(req.body);
+    var user = new User({
+        name: req.body.name,
+        emailId: req.body.emailId,
+        mobileNo: req.body.mobileNo,
+        tags: req.body.tags,
+        diagnosedWith: req.body.diagnosedWith
+    });
+    user.save();
+    res.redirect("/");
+});
 app.get('/register', function (req, res) {
     // res.redirect('/');
     res.render('pages/register');
@@ -58,6 +73,8 @@ app.get('/blog', function (req, res) {
     // res.redirect('/');
     res.render('pages/blog', { title: "Online-Portal" });
 });
+
+
 app.listen(port, function () {
     console.log('Listening at port 3000');
 });
