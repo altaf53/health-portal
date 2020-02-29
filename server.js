@@ -46,6 +46,10 @@ app.get('/', function (req, res) {
     // res.redirect('/');
     res.render('pages/index', { title: "Online-Portal" });
 });
+app.get('/homepage', function (req, res) {
+    // res.redirect('/');
+    res.render('pages/homepage', { title: "check session type" });
+});
 app.get('/login', function (req, res) {
     // res.redirect('/');
     res.render('pages/login');
@@ -57,6 +61,10 @@ app.get('/register', function (req, res) {
 app.get('/blog', function (req, res) {
     // res.redirect('/');
     res.render('pages/blog');
+});
+app.get('/Dblog', function (req, res) {
+    // res.redirect('/');
+    res.render('pages/Dblog');
 });
 app.listen(port, function () {
     console.log('Listening at port 3000');

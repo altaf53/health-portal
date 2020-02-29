@@ -21,7 +21,16 @@
         <h5 class="headers1">Tags:    
         </h5>
         <p class="subhead1">Add a tag to describe what your Article is about</p>
-        <input style="resize: none;margin-bottom: 4%;"class="form-control" placeholder="e.g. (obesity, alzheimer)" name="Tags" >
+        <input class="form-control col-lg-3 col-md-6 col-sm-6" placeholder="e.g. (obesity, alzheimer)" name="Tags" id="tagsinput" >
+        <div id="taglist" class="col-lg-3 col-md-6 col-sm-6">
+            <p class="tagsname">Alzheimer</p>
+            <p class="tagsname">Obesity</p>
+            <p class="tagsname">Anxiety</p>
+            <p class="tagsname">Depression</p>
+        </div>
+        <div id="selectedtags">
+            
+        </div>
 
     </div>
     <div class="form-group">
@@ -32,3 +41,20 @@
 </form>
 
 </div>
+<script>
+    function settag(tagvalue){
+        var str = '<div class="alert alert-warning alert-dismissible fade show tagspan" role="alert"><span>'+tagvalue+'</span><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>';
+        $('#selectedtags').append(str);
+    }
+
+    $('#tagsinput').click(function(){
+        $(this).val('');
+        $('#taglist').toggleClass('show');
+    });
+    $('.tagsname').click(function(){
+        var v = $(this).text();
+        $('#tagsinput').val(v);
+        $('#taglist').removeClass('show');
+        settag(v);
+    });
+</script>
