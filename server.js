@@ -70,6 +70,10 @@ app.get('/Dblog', function (req, res) {
     // res.redirect('/');
     res.render('pages/Dblog');
 });
+app.get('/alzheimer', function (req, res) {
+    // res.redirect('/');
+    res.render('pages/alzheimer');
+});
 
 
 
