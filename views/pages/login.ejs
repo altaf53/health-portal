@@ -12,7 +12,7 @@
     <div id="formdiv">
         <form name="loginform" class="forms">
             <h2>Login</h2>
-            <label for="user name">User Name</label>
+            <label for="user_name">User Name</label>
             <input type="text" id="user_name" placeholder="Enter Your User Name">
             <label for="userpassword">Password</label>
             <input type="password" id="userpassword" name="userpassword" placeholder="Enter Your password">
@@ -33,6 +33,7 @@
                     let url = "/login_submit";
                     $.post(url,{user_name:user_name,userpassword:userpassword}).done(function(data){
                         if (data == "Login Successful") {
+                            alert('ok');
                             swal({
                                 title: "Successfully Logged In",
                                 text: "Let's Share Experience",

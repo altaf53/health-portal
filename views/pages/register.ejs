@@ -45,7 +45,7 @@
             <label for="certificate" style="display:none;">Upload Your Certificate</label>
             <input type="file" name="certificate" id="certificate" style="display:none;">
             <input type="submit" class="searchbutton full" id="register_" value="Register">
-            
+            <a href="./">&#x21E6; Back to Home</a>
         </form>
     </div>
      <script type="text/javascript">
@@ -109,10 +109,8 @@
         $(document).ready(function(){
             $("#register_").on('click',function(e){
                 e.preventDefault();
-                alert("hhabj");
                 if(validateData() == true){
                     console.log("errro");
-                    
                     let user_name = $("#user_name").val();
                     let u_email_id = $("#u_email_id").val();
                     let userpassword = $("#userpassword").val();

@@ -1,16 +1,109 @@
-.avatar {
-    vertical-align: middle;
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-  }
-  .avatar1 {
-    vertical-align: middle;
-    width: 25px;
-    height: 25px;
-    border-radius: 50%;
-  }
+#questioncontainer{
+  padding-top: 40px;
+  padding-bottom: 40px;
+}
+#questionasker *{
+  vertical-align: middle;
+  display: inline-block;
+  margin: 0;
+  margin-right: 10px;
+}
+.avatar{
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+}
+#questionheader{
+  padding: 20px 0px;
+}
+#questiondesc{
+  border-top: 1px solid var(--border-light-color);
+  border-bottom: 1px solid var(--border-light-color);
+  padding: 5px 0px;
+}
+#questionoptionsdiv{
+  border-top: 1px solid #f0f0f0;
+  padding-top: 5px;
+}
+.questionoption{
+  display: inline-block;
+  margin: 0px 10px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  padding: 5px;
+}
+#questioncontent{
+  text-align: justify;
+}
+#report{
+  float: right;
+}
+.questionoption img{
+  width: 30px;
+  filter: grayscale(80%);
+}
+.questionoption:hover{
+  background: var(--primary-light-color);
+}
+.questionoption:hover img{
+  filter: grayscale(0%);
+}
+#addcomment{
+  background-color: var(--primary-light-color);
+  padding: 10px;
+  margin: 5px;
+  border-radius: 5px;
+  display: none;
+}
+#newcomment{
+  display: block;
+  resize: none;
+  width: 100%;
+  box-sizing: border-box;
+  height: 100px;
+  border-radius: 5px;
+  margin-bottom: 10px;
+  padding: 5px;
+  transition: all 0.2s ease;
+}
+.button-light{
+  background: var(--primary-light-color);
+  color: black;
+  transition: all 0.2s ease;
+}
+.button-light:hover{
+  background: var(--border-light-color);
+}
 
-  .bd{
-      border-top:1px solid var(--border-light-color);
-  }
+#commentsdiv{
+  background: var(--primary-light-color);
+  padding: 10px;
+  margin-top: 5px;
+}
+.commentcard{
+  background: #f0f0f0;
+  padding: 5px 10px;
+  margin: 3px 0px;
+  border-top: 1px solid var(--border-light-color);
+}
+.commentcard p{
+  margin: 5px;
+}
+.commentor{
+  text-decoration: underline;
+  color: var(--primary-dark-color);
+}
+.commentcontent{
+  font-size: 0.9em;
+  text-align: justify;
+}
+.commentoption{
+  display: inline-block;
+  margin: 0 5px;
+  cursor: pointer;
+  padding: 2px 5px;
+  transition: all 0.2s ease;
+}
+.commentoption:hover{
+  color: var(--primary-dark-color);
+}
