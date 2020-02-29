@@ -57,27 +57,10 @@
         }
         swal("Your BMI: "+bmi, str, strtype);
         } 
+        let url = "/point_submit";
+        $.post(url,{points:bmi}).done(function(data){
+            
+        });
     }
   
-    $( "#prev" ).click(function() {
-    $( ".img1" ).show( 2000 );
-    $("#prev").hide(2000);
-   
-
-    });
-
-    $('#next').click(function() { 
-    $(this).parents('#page1').hide();
-    $(this).parents('#page1').next('#page2').show();
-    setInterval(function(){
-        hideimgs();
-    }, 3000);
-    function hideimgs(){
-        $( ".img1" ).hide( 2000 );
-        $("#prev").show(2000);
-    }
-    return false;
-    }); 
-
-
     </script>

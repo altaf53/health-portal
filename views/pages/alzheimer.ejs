@@ -102,5 +102,11 @@
             points += 2;
         }
         swal("You completed the test", "Your points "+points+"/15", "success");
+
+        let url = "/point_submit";
+        $.post(url,{points:points}).done(function(data){
+            
+        });
+        return points;
     }
     </script>

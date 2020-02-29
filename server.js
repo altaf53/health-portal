@@ -9,11 +9,12 @@ const multer = require('multer');
 const fs = require("fs")
 const app = express();
 const dateTime = require('date-time');
-const bcrypt = require('bcryptjs');
+const bcrypt = require('bcrypt');
 var session = require('express-session');
 const crypto = require('crypto');
 const mongoose = require('mongoose');
 const User = require('./models/User');
+const TestScore = require('./models/TestScore');
 const dotenv = require('dotenv').config();
 const saltRounds = 10;
 var datetime = new Date();
@@ -37,7 +38,12 @@ var MemoryStore = require('memorystore')(session)
 //setting view engine to ejs, to able to render ejs files
 app.set('view engine', 'ejs');
 app.use(express.static(__dirname + "/views"));
-
+app.use(session({
+    secret: 'keyboard cat',
+    resave: false,
+    saveUninitialized: true,
+    cookie: { secure: true }
+  }))
 //including public folder for accessing files present in public folder
 app.use(express.static(__dirname + "/public"));
 app.use(bodyParser.json());
@@ -70,7 +76,7 @@ app.get('/Dblog', function (req, res) {
     // res.redirect('/');
     res.render('pages/Dblog');
 });
-app.get('/alzheimer', function (req, res) {
+app.get('/anxiety', function (req, res) {
     // res.redirect('/');
     res.render('pages/anxiety');
 });
@@ -99,36 +105,86 @@ app.get('/alzheimer', function (req, res) {
 // post for blog entry
 app.post('/post_blog', function (req, res) {
     try {
-        console.log(req.body.title);
-        console.log(' ');
-        console.log(req.body.description);
-        console.log(' ');
-        console.log(req.body.tag)
-
-
+        var user = new User({
+            title: req.body.title,
+            tags: req.body.tag,
+            description: req.body.description,
+            createdBy: s,
+            createdAt: s,
+            userId: s
+        });
+        user.save();
+        res.redirect("/");
+        
     } catch (error) {
         console.log(error);
     }
 });
 
-//post for reister
+//post for register
 app.post('/register_user', function (req, res) {
-    var name = req.body.user_name;
-    console.log(name);
+    let userpassword = req.body.userpassword;
+    const hash = bcrypt.hashSync(userpassword, saltRounds);
+    console.log(hash);
     try {
         var user = new User({
             name: req.body.user_name,
             emailId: req.body.u_email_id,
             mobileNo: req.body.mobileno,
             tags: req.body.tags,
-            diagnosedWith: req.body.diagnosed
+            diagnosedWith: req.body.diagnosed,
+            password: hash
         });
         user.save();
-        res.redirect("/");
+        res.send("succes");
+    } catch (error) {
+        console.log(error);
+        res.send("unsucces");
+    }
+    
+});
+
+//Post for login
+app.post('/login_submit', function (req, res) {
+    try {
+        User.find({
+            name: req.body.user_name
+        },function(error, result){
+            if(error){
+                console.log(error);
+            }
+            
+            var compare = bcrypt.compareSync(req.body.userpassword, result[0].password);
+            if(compare == true){
+
+                // req.session.user_type = result[0].user_type;
+                req.session.userid = result[0]._id.toString();
+                req.session.email_id = result[0].email_id;
+                req.session.username = result[0].name;
+                // req.session.img = result[0].imagePath;
+                // req.session.gender = result[0].gender;
+                req.session.diagonsedWith = result[0].diagonsedWith;
+                req.session.tags = result[0].tags;
+                res.send("Login Successful")
+            }
+        });
+    } catch (error) {
+        console.log(error);
+        res.send("unsuccessful");
+    }
+});
+
+//point submit
+app.post('/point_submit', function (req, res) {
+    try {
+        var Score = new TestScore({
+            score: req.body.points,
+            userId: req.session.userid
+        });
+        Score.save();
     } catch (error) {
         console.log(error);
     }
-    
 });
 
 app.listen(port, function () {
