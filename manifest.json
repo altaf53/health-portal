@@ -1,0 +1,9 @@
+{
+	"display" : "fullscreen",
+	"orientation" : "portrait",
+	"lang" : "English",
+	"name" : "online-portal",
+	"short_name" : "online",
+	"description" : "abc",
+	"start_url" : "http://sieshealthportal.herokuapp.com"
+}
