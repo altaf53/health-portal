@@ -1,19 +1,50 @@
-<div class="container-fluid jumbotron">
+<script>
+    $(document).ready(function(){
+        $("#postblog").on('click',function(e){
+            
+            e.preventDefault();
+            let title = $("#title").val();
+            let description = $("#description").val();
+            let tag = $("#tag").val();
+            let url = "/post_blog"
+            $.post(url,{title:title, description:description, tag:tag}).done(function(data){
+                if(data.login == "Login Successful"){
+                    let geturl = data.redirect;
+                    $(location).attr('href',geturl);
+                }
+                else if(data == "Invalid Credentials"){
+                    swal({
+                        title:"Invalid Credentials",
+                        text:"Username/Password Incorrect",
+                        icon:"warning",
+                        dangerMode:true,
+                    }).then((willDelete) => {
+                        if (willDelete) {
+                            let geturl = "/login";
+                            $(location).attr('href',geturl);
+                        }
+                })
+                }
+                else{}
+            })
+        })
+    })
+</script>
+<div class="container jumbotron">
     <h3 style="text-align: center;">Ask a Question/Share your Experience</h3>
     <form>
 
-    
     <div class="form-group">
         <h5 class="headers1">Title:    
         </h5>
         <p class="subhead1">Be specific and imagine you're asking a question to another person</p>
-        <input type="text" class="form-control" placeholder=" eg: How can i get rid of obesity?" name="Title">
+        <input type="text" id="title" class="form-control" placeholder=" eg: How can i get rid of obesity?" name="Title">
     </div>
     <div class="form-group">
         <h5 class="headers1">Description:    
         </h5>
         <p class="subhead1">Include all the information someone would need to answer your question</p>
-        <textarea  style="resize: none;"class="form-control" placeholder="Enter description..." name="Description" rows="10"></textarea>
+        <textarea  style="resize: none;"class="form-control" placeholder="Enter description..." name="Description" rows="10" id="description"></textarea>
 
     </div>
     <div class="form-group">
@@ -34,7 +65,7 @@
     </div>
     <div class="form-group">
        
-        <button class="searchbutton" type="submit" >Post</button>
+        <button class="searchbutton" id="postblog" type="submit" >Post</button>
 
     </div>
 </form>
