@@ -99,7 +99,10 @@ app.get('/alzheimer', function (req, res) {
     // res.redirect('/');
     res.render('pages/alzheimer');
 });
-
+app.get('/chat', function (req, res) {
+    // res.redirect('/');
+    res.render('pages/chat');
+});
 
 
 
