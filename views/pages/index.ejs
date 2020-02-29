@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
@@ -10,6 +9,21 @@
     <link rel="stylesheet" href="/css/forumpage.css">
     <link href="/css/blog.css" rel="stylesheet">
 </head>
+
+<!-- Route for blog -->
+<script type="text/javascript">
+    $(function() {
+        $('#ask').click(function() {
+                $.ajax({
+                    url: '/blog',
+                    type: 'GET',
+                    cache: false,
+                }).done(function(result){
+                    $('#maincontent').html(result);
+                });
+        });
+    });
+</script>
 
 <body>
     <!--  -->
@@ -25,34 +39,31 @@
                     <li><a href="">Track Your Health</a></li>
                     <li><a href="">Tags</a></li>
                 </ul>
-                <button class="searchbutton">Ask A Question</button>
+                <button class="searchbutton" id="ask" >Ask A Question</button>
             </div>
-            <div class="maincontent">
-                <%- include("./blog") -%>
-                <!--
-                <div id="qna">
+            <div class="maincontent" id="maincontent">
+               <%- include("./Dblog") -%> 
+                
+                <!-- <div id="qna">
                     <input type="text" name="search" id="searchbar" placeholder="Search something...">
                     <button class="searchbutton">Search</button>
                 </div>
                 <div id="results">
                     <div class="question paddeddivs">
                         <p class="questionheader">Question 1</p>
-                        <p class="questiondesc">Question description Lorem ipsum dolor sit amet consectetur adipisicing
-                            elit. Illum </p>
+                        <p class="questiondesc">Question description Lorem ipsum dolor sit amet consectetur adipisicing elit. Illum </p>
                         <p class="tags"><span class="tag">tag1</span><span class="tag">tag2</span></p>
                         <p class="topcomment">The top comment of the question</p>
                     </div>
                     <div class="question paddeddivs">
                         <p class="questionheader">Question 1</p>
-                        <p class="questiondesc">Question description Lorem ipsum dolor sit amet consectetur adipisicing
-                            elit. Illum </p>
+                        <p class="questiondesc">Question description Lorem ipsum dolor sit amet consectetur adipisicing elit. Illum </p>
                         <p class="tags"><span class="tag">tag1</span><span class="tag">tag2</span></p>
                         <p class="topcomment">The top comment of the question</p>
                     </div>
                     <div class="question paddeddivs">
                         <p class="questionheader">Question 1</p>
-                        <p class="questiondesc">Question description Lorem ipsum dolor sit amet consectetur adipisicing
-                            elit. Illum </p>
+                        <p class="questiondesc">Question description Lorem ipsum dolor sit amet consectetur adipisicing elit. Illum </p>
                         <p class="tags"><span class="tag">tag1</span><span class="tag">tag2</span></p>
                         <p class="topcomment">The top comment of the question</p>
                     </div>
@@ -60,12 +71,11 @@
                     <br><br><br><br><br><br><br><br><br><br><br>
                     <br><br><br><br><br><br><br><br><br><br><br>
                 </div>
-            </div> -->
+            </div> --> 
         </div>
     </div>
-
+    
 
     <script src="/js/forumpage.js"></script>
 </body>
-
 </html>
