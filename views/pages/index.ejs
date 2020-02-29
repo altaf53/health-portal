@@ -2,17 +2,58 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel='manifest' href='../../manifest.json'>
     <title><%= title %></title>
+    <%- include ('../partials/links') -%>
+    <link rel="stylesheet" href="/css/forumpage.css">
 </head>
 <body>
-    <header>
-        <%- include ('../partials/header') %>
-    </header>
+    <div id="container">
+        <%- include("../partials/header") -%>
+        <%- include("../partials/nav") -%>
+        <div id="main">
+            <div class="sidebar">
+                <ul id="sidebarul">
+                    <li><a href="">Home</a></li>
+                    <li><a href="">Hot Topics</a></li>
+                    <li><a href="">Blogs</a></li>
+                    <li><a href="">Courses</a></li>
+                </ul>
+            </div>
+            <div class="maincontent">
+                <div id="qna">
+                    <input type="text" name="search" placeholder="Search something...">
+                    <button id="askquestion">Ask A Question</button>
+                </div>
+                <div id="results">
+                    <div class="question paddeddivs">
+                        <p class="questionheader">Question 1</p>
+                        <p class="questiondesc">Question description Lorem ipsum dolor sit amet consectetur adipisicing elit. Illum </p>
+                        <p class="tags"><span class="tag">tag1</span><span class="tag">tag2</span></p>
+                        <p class="topcomment">The top comment of the question</p>
+                    </div>
+                    <div class="question paddeddivs">
+                        <p class="questionheader">Question 1</p>
+                        <p class="questiondesc">Question description Lorem ipsum dolor sit amet consectetur adipisicing elit. Illum </p>
+                        <p class="tags"><span class="tag">tag1</span><span class="tag">tag2</span></p>
+                        <p class="topcomment">The top comment of the question</p>
+                    </div>
+                    <div class="question paddeddivs">
+                        <p class="questionheader">Question 1</p>
+                        <p class="questiondesc">Question description Lorem ipsum dolor sit amet consectetur adipisicing elit. Illum </p>
+                        <p class="tags"><span class="tag">tag1</span><span class="tag">tag2</span></p>
+                        <p class="topcomment">The top comment of the question</p>
+                    </div>
+                    <br><br><br><br><br><br><br><br><br><br><br>
+                    <br><br><br><br><br><br><br><br><br><br><br>
+                    <br><br><br><br><br><br><br><br><br><br><br>
+                </div>
+            </div>
+        </div>
+    </div>
     
 
-    
+    <script src="/js/forumpage.js"></script>
 </body>
 </html>
