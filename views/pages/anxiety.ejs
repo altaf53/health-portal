@@ -1,0 +1,122 @@
+
+<div class="container-fluid jumbotron">
+    <h3 style="text-align: center;">Track Your Health</h3>
+    <form>
+        <!-- page1 -->
+    <div id="page1">
+        <div class="form-group">
+            <h5 class="headers1">Q.1) Do you get anxious if you have to speak or perform in any way in front of a group of strangers?</h5>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio"  id="Q1.1" value="Yes" name="Q1">
+                <label class="form-check-label" for="Q1.1">Yes</label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio"  id="Q1.2" value="No" name="Q1">
+                <label class="form-check-label" for="Q1.2">No</label>
+            </div>
+        </div>
+        <div class="form-group">
+            <h5 class="headers1">Q.2) Are you easily hurt by what other people do or say to you?</h5>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio"  id="Q2.1" value="Yes" name="Q2">
+                <label class="form-check-label" for="Q2.1">Yes</label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio"  id="Q2.2" value="No" name="Q2">
+                <label class="form-check-label" for="Q2.2">No</label>
+            </div>
+        </div>
+        <div class="form-group">
+            <h5 class="headers1">Q.3) Do you keep in the background on social occasions?</h5>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio"  id="Q3.1" value="Yes" name="Q3">
+                <label class="form-check-label" for="Q3.1">Yes</label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio"  id="Q3.2" value="No" name="Q3">
+                <label class="form-check-label" for="Q3.2">No</label>
+            </div>
+        </div>
+        <div class="form-group">
+            <h5 class="headers1">Q.4) Do you keep in the background on social occasions?</h5>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio"  id="Q4.1" value="Yes" name="Q4">
+                <label class="form-check-label" for="Q4.1">Yes</label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio"  id="Q4.2" value="No" name="Q4">
+                <label class="form-check-label" for="Q4.2">No</label>
+            </div>
+        </div>
+        <div class="form-group">
+            <h5 class="headers1">Q.5) Do you keep in the background on social occasions?</h5>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio"  id="Q5.1" value="Yes" name="Q5">
+                <label class="form-check-label" for="Q5.1">Yes</label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio"  id="Q5.2" value="No" name="Q5">
+                <label class="form-check-label" for="Q5.2">No</label>
+            </div>
+        </div>
+
+           
+        <div class="form-group">
+            <button class="searchbutton" id="next" >Next</button>
+        </div>
+    </div>
+</div>
+</form>
+
+</div>
+<script>
+    var counter = 0;
+    $( "#prev" ).click(function() {
+        counter = 1;
+        $( ".img1" ).show(1000, function(){
+            setTimeout(function(){
+                hideimgs();
+            }, 1000);
+        });
+        $("#prev").hide(1000);
+    });
+    $('#next').click(function() { 
+    $(this).parents('#page1').hide();
+    $(this).parents('#page1').next('#page2').show();
+    setTimeout(function(){
+        hideimgs();
+    }, 3000);
+    return false;
+    }); 
+    function hideimgs(){
+        $( ".img1" ).hide( 1000 );
+        if(counter == 0){
+            $("#prev").show(1000);
+        }
+        
+    }
+
+    function givepoints(){
+        var points = 0;
+        var d = new Date();
+        if($('#year').val() == d.getFullYear()){
+            points += 2;
+        }
+        if(parseInt($('#month').val()) == (d.getMonth()+1)){
+            points += 2;
+        }
+        if(parseInt($('#date').val()) == d.getDate()){
+            points += 5;
+        }
+        if($('#object1').val().toLowerCase() == "ball"){
+            points += 2;
+        }
+        if($('#object2').val().toLowerCase() == "cup"){
+            points += 2;
+        }
+        if($('#object3').val().toLowerCase() == "pen"){
+            points += 2;
+        }
+        swal("You completed the test", "Your points "+points+"/15", "success");
+    }
+    </script>
