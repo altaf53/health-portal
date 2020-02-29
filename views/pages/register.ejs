@@ -10,48 +10,14 @@
 </head>
 
 <body>
-    <script>
-        $(document).ready(function(){
-            $("#register_user").on('click',function(e){
-                
-                e.preventDefault();
-                let user_name = $("#user_name").val();
-                let u_email_id = $("#u_email_id").val();
-                let userpassword = $("#userpassword").val();
-                let mobileno = $("#mobileno").val();
-                let tags = $("#tags").val();
-                let diagnosed = $("#diagnosed").val();
-                let url = "/register_user"
-                $.post(url,{user_name:user_name, u_email_id:u_email_id, userpassword:userpassword, mobileno:mobileno, tags:tags, diagnosed:diagnosed}).done(function(data){
-                    if(data.login == "Login Successful"){
-                        let geturl = data.redirect;
-                        $(location).attr('href',geturl);
-                    }
-                    else if(data == "Invalid Credentials"){
-                        swal({
-                            title:"Invalid Credentials",
-                            text:"Username/Password Incorrect",
-                            icon:"warning",
-                            dangerMode:true,
-                        }).then((willDelete) => {
-                            if (willDelete) {
-                                let geturl = "/login";
-                                $(location).attr('href',geturl);
-                            }
-                    })
-                    }
-                    else{}
-                })
-            })
-        })
-    </script>
+   
     <div>
-        <form action="/register" class="forms" method="POST">
+        <form  class="forms" name="RegForm" method="POST">
             <h2>Register</h2>
             <label for="username">Username</label>
-            <input type="text" name="username" placeholder="Enter a username..." id="user_name">
+            <input type="text" name="user_name" placeholder="Enter a username..." id="user_name">
             <label for="useremail">Your email</label>
-            <input type="email" name="email" placeholder="Enter Your email-id" id="u_email_id">
+            <input type="email" name="u_email_id" placeholder="Enter Your email-id" id="u_email_id">
             <label for="userpassword">Password</label>
             <input type="password" name="userpassword" id="userpassword" placeholder="Enter Your password">
             <label for="confirmpassword">Confirm Password</label>
@@ -62,9 +28,101 @@
             <input type="text" name="tags" id="tags" placeholder="Enter tags">
             <label for="diagnosed">Diagnosed with</label>
             <input type="text" name="diagnosed" id="diagnosed" placeholder="Enter the disease you are diagnosed with">
-            <input type="submit" class="searchbutton" id="register_user" value="Register">
+            <input type="submit" class="searchbutton" id="register_" value="Register">
         </form>
     </div>
+     <script type="text/javascript">
+        
+        function validateData(){
+            var flag = true;
+            var user_name = document.RegForm.user_name.value;
+            var u_email_id=document.RegForm.u_email_id.value;
+            var mobileno = document.RegForm.mobileno.value;
+            var tags =document.RegForm.tags.value;
+            var diagnosed =document.RegForm.diagnosed.value;
+             var password = document.RegForm.userpassword.value;
+             var password_confirm = document.RegForm.comfirmpassword.value;
+            // var decimal=  /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{8,15}$/;
+
+            var check=[];
+
+            if(user_name==""){
+                check.push('User Name Required')
+            }
+            if(/^(\+\d{1,3}[- ]?)?\d{10}$/.test(mobileno)== false){
+                check.push(' Mobile Number Invalid/Required')   
+            }
+            if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(u_email_id) == false){
+                check.push(' Email Invalid/Required')
+            }
+            
+            if(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{8,15}$/.test(password) == false){
+                check.push('Your password must contain atleast one uppercase, one lowercase, one numeric, one special character and should have minimum 8 characters ')
+            }
+            if(password !== password_confirm){
+                check.push(' Password do not match ')
+
+            }
+            if(tags==""){
+                check.push('Atleast one Tag is Required')  
+            }
+            if(diagnosed==""){
+                check.push('diagnosed Required')
+            }
+            
+            
+            if(check.length > 0){
+                swal({
+                    title: "Invalid Input",
+                    text:check.join( '\n'),
+                    icon: "warning"
+                    
+                  })
+                //   check = [];
+                console.log(check)
+                flag=false;
+      }
+            return flag;
+        }
+    </script>
+    <script>
+        $(document).ready(function(){
+            $("#register_").on('click',function(e){
+                if(validateData() == true){
+                    console.log("errro");
+                    e.preventDefault();
+                    let user_name = $("#user_name").val();
+                    let u_email_id = $("#u_email_id").val();
+                    let userpassword = $("#userpassword").val();
+                    let mobileno = $("#mobileno").val();
+                    let tags = $("#tags").val();
+                    let diagnosed = $("#diagnosed").val();
+                    let url = "/register_user"
+                    $.post(url,{user_name:user_name, u_email_id:u_email_id, userpassword:userpassword, mobileno:mobileno, tags:tags, diagnosed:diagnosed}).done(function(data){
+                        if(data == "succes"){
+                            swal({
+                                title: "Registration Successful!",
+                                text: "Login to Continue",
+                                icon: "success",
+                                }).then(function(){
+                                    window.location = '/login';
+                                });
+                        }
+                        else if('unsucces'){
+                            swal({
+                                title: "Registration Unsuccessful!",
+                                text: "Please Retry Later",
+                                icon: "error",
+                                });
+                        }else{}
+                    });
+                }else{
+                    e.preventDefault();
+                    console.log(error);
+                }
+            });
+        });
+    </script>
 </body>
 
 </html>

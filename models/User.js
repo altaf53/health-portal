@@ -29,7 +29,18 @@ const userSchema = new Schema({
   dateOfRegistration: {
     type: Date,
     default: Date.now()
+  },
+  password: {
+    type: String
+  },
+  user_type: {
+    type: String,
+    enum: ['user', 'doctor']
+  },
+  field: {
+    type: String
   }
+  
 });
 
 module.exports = mongoose.model("User", userSchema);

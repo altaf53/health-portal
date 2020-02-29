@@ -19,4 +19,4 @@ const doctorSchema = new Schema({
     type: String,
     enum: ['M', 'F']
   }
-})
+}) 
