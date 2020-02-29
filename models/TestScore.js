@@ -10,6 +10,9 @@ const testScoreSchema = new mongoose.Schema({
   },
   score: {
     type: Number
+  },
+  createdAt: {
+    type: Date
   }
 });
 

@@ -10,22 +10,46 @@
 <body>
     <%- include("../partials/nav") -%>
     <div id="formdiv">
-        <form action="" class="forms">
+        <form name="loginform" class="forms">
             <h2>Login</h2>
-            <label for="useremail">Email id</label>
-            <input type="email" name="email" id="useremail" placeholder="Enter Your email-id">
+            <label for="user name">User Name</label>
+            <input type="text" id="user_name" placeholder="Enter Your User Name">
             <label for="userpassword">Password</label>
-            <input type="password" name="userpassword" id="userpassword" placeholder="Enter Your password">
+            <input type="password" id="userpassword" name="userpassword" placeholder="Enter Your password">
             <p>
                 <input type="checkbox" id="showpass">
                 <label for="showpass">Show Password</label>
             </p>
-            <input type="submit" class="searchbutton" value="Login">
+            <input type="submit" class="searchbutton" id="login" value="Login">
             <a href="./">&#x21E6; Back to Home</a>
         </form>
     </div>
     <script>
         $(document).ready(function(){
+            $("#login").on('click',function(e){
+                    e.preventDefault();
+                    let user_name = $("#user_name").val();
+                    let userpassword = $("#userpassword").val();
+                    let url = "/login_submit";
+                    $.post(url,{user_name:user_name,userpassword:userpassword}).done(function(data){
+                        if (data == "Login Successful") {
+                            swal({
+                                title: "Successfully Logged In",
+                                text: "Let's Share Experience",
+                                icon: "success",
+                                }).then(function(){
+                                    window.location = '/';
+                                });
+                        } else if(data == "unsuccessful")
+                        {
+                            swal({
+                                title: "Password or User Name Doesn't Match",
+                                text: "Please Try Again",
+                                icon: "error",
+                                });
+                        }
+                    });
+                });
             $('#showpass').on('change', function(){
                 if(this.checked){
                     $('#userpassword').attr('type', 'text');
