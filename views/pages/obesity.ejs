@@ -1,0 +1,82 @@
+<div class="container-fluid jumbotron">
+    <h3 style="text-align: center;">Track Your Health</h3>
+    <form>
+        <!-- page1 -->
+    <div id="page1">
+        <div class="form-group">
+            <h5 class="headers1">Enter Your Age:</h5>
+            
+            <input type="text" class="form-control col-3" placeholder="e.g. 23" name="Age">
+            <h5 class="headers1">Enter Your Gender:</h5>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="Gender" id="male" value="Male">
+                <label class="form-check-label" for="male">Male</label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="Gender" id="female" value="Female">
+                <label class="form-check-label" for="female">Female</label>
+            </div>
+            
+            <h5 class="headers1">Enter Your Height (cm):</h5>
+            
+            <input type="text" class="form-control col-3" placeholder="e.g. 180" name="Height">
+            <h5 class="headers1">Enter Your Weight (kg):    </h5>
+            <input type="text" class="form-control col-3"   placeholder="e.g. 65"name="Weight">
+
+        </div>
+        
+        <div class="form-group">
+        
+            <button class="searchbutton" id="done" type="button" onclick="xyz()">Done</button>
+
+        </div>
+    </div>
+    <!-- page 2 -->
+    <!-- <div id="page2" style="display: none;">
+       
+
+        </div>
+        
+        <div class="form-group">
+        
+            <button class="searchbutton"  type="button">Done</button>
+
+        </div>
+    </div>
+    
+   
+    </div> -->
+</form>
+
+</div>
+<script>
+    function xyz(){
+        
+
+    swal("Good job!", "You clicked the button!", "success")
+
+
+    }
+  
+    $( "#prev" ).click(function() {
+    $( ".img1" ).show( 2000 );
+    $("#prev").hide(2000);
+   
+
+    });
+
+    $('#next').click(function() { 
+    $(this).parents('#page1').hide();
+    $(this).parents('#page1').next('#page2').show();
+    setInterval(function(){
+        hideimgs();
+    }, 3000);
+    function hideimgs(){
+        $( ".img1" ).hide( 2000 );
+        $("#prev").show(2000);
+    }
+    return false;
+    }); 
+
+
+    </script>

@@ -72,7 +72,7 @@ app.get('/Dblog', function (req, res) {
 });
 app.get('/alzheimer', function (req, res) {
     // res.redirect('/');
-    res.render('pages/alzheimer');
+    res.render('pages/obesity');
 });
 
 
