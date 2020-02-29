@@ -47,6 +47,11 @@ app.get('/', function (req, res) {
     res.render('pages/index', { title: "Online-Portal" });
 });
 
+app.get('/blog', function (req, res) {
+    // res.redirect('/');
+    res.render('pages/blog', { title: "Online-Portal" });
+});
+
 
 
 app.listen(port, function () {
