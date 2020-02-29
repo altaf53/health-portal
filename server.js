@@ -85,7 +85,7 @@ app.get('/anxiety', function (req, res) {
     // res.redirect('/');
     res.render('pages/anxiety');
 });
-app.get('/tags', function (req, res) {
+app.get('/question', function (req, res) {
     // res.redirect('/');
     res.render('pages/question');
 });
