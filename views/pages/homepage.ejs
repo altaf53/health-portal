@@ -4,8 +4,10 @@
 </div>
 <div id="results">
     <div class="questioncard paddeddivs">
-        <p class="questionheader">Question 1</p>
-        <!-- <p class="questiondesc">Question description Lorem ipsum dolor sit amet consectetur adipisicing elit. Illum </p> -->
+         <% results.forEach((result)=>{ %>
+            <a class="questionheader"><%= result.question %></a>
+
+      <%  }) %>        <!-- <p class="questiondesc">Question description Lorem ipsum dolor sit amet consectetur adipisicing elit. Illum </p> -->
         <p class="tags"><span class="tag">tag1</span><span class="tag">tag2</span></p>
         <p class="topcomment">The top comment of the question</p>
     </div>
