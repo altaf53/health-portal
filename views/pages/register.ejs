@@ -45,9 +45,9 @@
             })
         })
     </script>
-    <div>
-        <form action="/register" class="forms" method="POST">
-            <h2>Register</h2>
+    <div id="formdiv">
+        <form action="/register" class="forms" id="registerform" method="POST">
+            <h2 class="full">Register</h2>
             <label for="username">Username</label>
             <input type="text" name="username" placeholder="Enter a username..." id="user_name">
             <label for="useremail">Your email</label>
@@ -59,12 +59,55 @@
             <label for="mobileno">Mobile No.</label>
             <input type="number" name="mobileno" id="mobileno" placeholder="Enter Your mobile no.">
             <label for="tags">Interested topics</label>
-            <input type="text" name="tags" id="tags" placeholder="Enter tags">
+            <input type="text" name="tags" id="tags" placeholder="Enter topics you are interested in" list="taglist">
+            <datalist id="taglist">
+                <option value="Alzheimer">
+                <option value="Obesity">
+                <option value="Anxiety">
+                <option value="Depression">
+            </datalist>
+            <div id="selectedtags" class="full">
+
+            </div>
+            <label for="accounttype">Choose an account type:</label>
+            <select name="accounttype" id="accounttype" onchange="setusertype($(this))">
+                <option value="user" selected>User</option>
+                <option value="doctor">Doctor</option>
+            </select>
             <label for="diagnosed">Diagnosed with</label>
             <input type="text" name="diagnosed" id="diagnosed" placeholder="Enter the disease you are diagnosed with">
-            <input type="submit" class="searchbutton" id="register_user" value="Register">
+            <label for="certificate" style="display:none;">Upload Your Certificate</label>
+            <input type="file" name="certificate" id="certificate" style="display:none;">
+            <input type="submit" class="searchbutton full" id="register_user" value="Register">
         </form>
     </div>
+    <script>
+        function setusertype(t){
+            var v = t.val();
+            if(v == "user"){
+                $('#diagnosed').show().prev().show();
+                $('#certificate').hide().prev().hide();
+            }
+            else if(v == "doctor"){
+                $('#certificate').show().prev().show();
+                $('#diagnosed').hide().prev().hide();
+            }
+        }
+        $(document).ready(function(){
+            $('#tags').on('input', function(){
+                var v = this.value;
+                if($('#taglist option').filter(function(){
+                    return this.value.toUpperCase() === v.toUpperCase();        
+                }).length){
+                    var str = '<div class="alert alert-warning alert-dismissible fade show tagspan" role="alert"><span>'+v+'</span><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>';
+                    $('#selectedtags').append(str);
+                }
+            });
+            $('#tags').click(function(){
+                $(this).select();
+            });
+        });
+    </script>
 </body>
 
 </html>

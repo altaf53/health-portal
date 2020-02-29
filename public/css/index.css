@@ -72,3 +72,13 @@ nav{
     left: 0;
     right: 0;
 }
+.searchbutton{
+    padding: 10px 20px;
+    border-radius: 5px;
+    border: 1px solid #d3d3d3;
+    background: linear-gradient(to right, var(--button-left-color1), var(--button-right-color));
+    color: #f5f5f5;
+}
+.searchbutton:hover{
+    background: linear-gradient(to right, var(--button-left-color2), var(--button-right-color));
+}

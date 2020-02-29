@@ -72,9 +72,16 @@ app.get('/Dblog', function (req, res) {
 });
 app.get('/alzheimer', function (req, res) {
     // res.redirect('/');
+    res.render('pages/alzheimer');
+});
+app.get('/obesity', function (req, res) {
+    // res.redirect('/');
     res.render('pages/obesity');
 });
-
+app.get('/alzheimer', function (req, res) {
+    // res.redirect('/');
+    res.render('pages/alzheimer');
+});
 
 
 
