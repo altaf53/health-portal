@@ -56,7 +56,7 @@ app.get('/register', function (req, res) {
 });
 app.get('/blog', function (req, res) {
     // res.redirect('/');
-    res.render('pages/blog', { title: "Online-Portal" });
+    res.render('pages/blog');
 });
 app.listen(port, function () {
     console.log('Listening at port 3000');
