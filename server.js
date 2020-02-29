@@ -14,6 +14,7 @@ var session = require('express-session');
 const crypto = require('crypto');
 const mongoose = require('mongoose');
 const User = require('./models/User');
+const TestScore = require('./models/TestScore');
 const dotenv = require('dotenv').config();
 const saltRounds = 10;
 var datetime = new Date();
@@ -160,6 +161,18 @@ app.post('/login_submit', function (req, res) {
     }
 });
 
+//point submit
+app.post('/point_submit', function (req, res) {
+    try {
+        var Score = new TestScore({
+            score: req.body.points,
+            userId: req.session.userid
+        });
+        Score.save();
+    } catch (error) {
+        console.log(error);
+    }
+});
 
 app.listen(port, function () {
     console.log('Listening at port 3000');
