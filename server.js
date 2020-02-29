@@ -54,6 +54,28 @@ app.get('/blog', function (req, res) {
 
 
 
+
+
+
+
+
+
+// post for blog entry
+app.post('/post_blog', urlencodedParser, function (req, res) {
+    try {
+        console.log(req.body.title);
+        console.log(' ');
+        console.log(req.body.description);
+        console.log(' ');
+        console.log(req.body.tag)
+
+
+    } catch (error) {
+        console.log(error);
+    }
+});
+
+
 app.listen(port, function () {
     console.log('Listening at port 3000');
 });
