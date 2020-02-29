@@ -13,6 +13,7 @@ const bcrypt = require('bcryptjs');
 var session = require('express-session');
 const crypto = require('crypto');
 const mongoose = require('mongoose');
+const User = require('./models/User');
 const dotenv = require('dotenv').config();
 const saltRounds = 10;
 var datetime = new Date();
@@ -39,25 +40,80 @@ app.use(express.static(__dirname + "/views"));
 
 //including public folder for accessing files present in public folder
 app.use(express.static(__dirname + "/public"));
-var urlencodedParser = bodyParser.urlencoded({ extended: false });
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 
 //Setting the homepage or start page Route
 app.get('/', function (req, res) {
     // res.redirect('/');
     res.render('pages/index', { title: "Online-Portal" });
 });
+app.get('/homepage', function (req, res) {
+    // res.redirect('/');
+    res.render('pages/homepage', { title: "check session type" });
+});
 app.get('/login', function (req, res) {
     // res.redirect('/');
     res.render('pages/login');
 });
+
+
 app.get('/register', function (req, res) {
     // res.redirect('/');
     res.render('pages/register');
 });
 app.get('/blog', function (req, res) {
     // res.redirect('/');
-    res.render('pages/blog', { title: "Online-Portal" });
+    res.render('pages/blog');
 });
+app.get('/Dblog', function (req, res) {
+    // res.redirect('/');
+    res.render('pages/Dblog');
+});
+
+
+
+
+
+
+
+
+
+// post for blog entry
+app.post('/post_blog', function (req, res) {
+    try {
+        console.log(req.body.title);
+        console.log(' ');
+        console.log(req.body.description);
+        console.log(' ');
+        console.log(req.body.tag)
+
+
+    } catch (error) {
+        console.log(error);
+    }
+});
+
+//post for reister
+app.post('/register_user', function (req, res) {
+    var name = req.body.user_name;
+    console.log(name);
+    try {
+        var user = new User({
+            name: req.body.user_name,
+            emailId: req.body.u_email_id,
+            mobileNo: req.body.mobileno,
+            tags: req.body.tags,
+            diagnosedWith: req.body.diagnosed
+        });
+        user.save();
+        res.redirect("/");
+    } catch (error) {
+        console.log(error);
+    }
+    
+});
+
 app.listen(port, function () {
     console.log('Listening at port 3000');
 });

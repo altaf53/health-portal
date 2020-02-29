@@ -4,3 +4,42 @@
 .subhead1{
     margin: 3px;
 }
+#taglist{
+    background: linear-gradient(to left, var(--button-left-color1), #9c75eb);
+    padding: 5px;
+    margin-top: 5px;
+    border-radius: 5px;
+    color: var(--primary-light-color);
+    cursor: pointer;
+    display: none;
+}
+#taglist.show{
+    display: block;
+}
+.tagspan{
+    display: inline-block;
+}
+.tagsname{
+    padding: 5px;
+    margin: 0px;
+    transition: all 0.2s ease;
+    border-top: 1px solid var(--button-right-color);
+}
+.tagspan{
+    margin: 2px 5px;
+}
+.tagsname:hover{
+    background-color: var(--button-right-color);
+}
+.tagsname:first-child{
+    border: 0;
+}
+#selectedtags{
+    margin: 5px 0px;
+    background: #e3e3e3;
+    border-radius: 5px;
+    font-size: 14px;
+    padding: 5px 10px;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+}

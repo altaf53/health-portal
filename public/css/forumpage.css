@@ -31,6 +31,7 @@
 }
 #sidebarul li.active a, #sidebarul li:hover a{
     color: var(--primary-dark-color);
+    cursor: pointer;
 }
 #qna{
     border-bottom: 1px solid #ededed;
