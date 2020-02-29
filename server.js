@@ -72,7 +72,6 @@ app.get('/Dblog', function (req, res) {
 });
 app.get('/alzheimer', function (req, res) {
     // res.redirect('/');
-<<<<<<< HEAD
     res.render('pages/anxiety');
 });
 app.get('/tags', function (req, res) {
@@ -81,9 +80,6 @@ app.get('/tags', function (req, res) {
 });
 
 
-=======
-    res.render('pages/alzheimer');
-});
 app.get('/obesity', function (req, res) {
     // res.redirect('/');
     res.render('pages/obesity');
@@ -92,7 +88,6 @@ app.get('/alzheimer', function (req, res) {
     // res.redirect('/');
     res.render('pages/alzheimer');
 });
->>>>>>> 2f4e791291fa74a93c3f87e6feb70e22d8b3a08f
 
 
 
