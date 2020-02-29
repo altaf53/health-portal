@@ -45,14 +45,11 @@ var urlencodedParser = bodyParser.urlencoded({ extended: false });
 app.get('/', function (req, res) {
     // res.redirect('/');
     res.render('pages/index', { title: "Online-Portal" });
-<<<<<<< HEAD
 });
 
 app.get('/blog', function (req, res) {
     // res.redirect('/');
     res.render('pages/blog', { title: "Online-Portal" });
-=======
->>>>>>> 00a5b16e3da0c86c44b6a991a09f687d4d220b11
 });
 
 
