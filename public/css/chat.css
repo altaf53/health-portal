@@ -1,0 +1,115 @@
+#chatcontainer{
+    display: grid;
+    grid-template-columns: auto 300px;
+}
+#chatbox{
+    background-color: var(--primary-light-color);
+    border: 3px solid var(--border-light-color);
+    width: 60%;
+    min-width: 400px;
+    margin: 20px auto;
+    border-radius: 10px;
+    padding: 20px;
+    position: relative;
+}
+#chatbox h3{
+    border-bottom: 1px solid var(--border-light-color);
+    padding: 5px 0px;
+    margin: 0;
+}
+#realchat{
+    height: 500px;
+    border-bottom: 1px solid var(--border-light-color);
+    padding: 10px;
+}
+.msgs p{
+    display: inline-block;
+    text-align: justify;
+    padding: 5px 10px;
+    border-radius: 10px;
+    max-width: 300px;
+}
+.mymsgs{
+    text-align: right;
+}
+.othersmsgs{
+    text-align: left;
+}
+.mymsgs p{
+    background-color: var(--button-right-color);
+    color: var(--primary-light-color);
+    border: 1px solid var(--button-left-color2);
+}
+.othersmsgs p{
+    background-color: var(--primary-light-color);
+    border: 1px solid #b3b3b3;
+}
+#sendmsgs{
+    position: absolute;
+    width: 100%;
+    box-sizing: border-box;
+    bottom: 18px;
+    display: grid;
+    grid-template-columns: auto 100px;
+    grid-gap: 5px;
+}
+#newmsg, #sendnewmsg{
+    padding: 5px 10px;
+    border-radius: 5px;
+    border: 1px solid #8a8a8a;
+} 
+#sendnewmsg{
+    background: linear-gradient(to right, var(--button-left-color1), var(--button-right-color));
+    color: var(--primary-light-color);
+}
+#sendnewmsg:hover{
+    background: linear-gradient(to right, var(--button-left-color2), var(--button-right-color));
+}
+#chatlist{
+    background-color: var(--primary-light-color);
+    padding: 20px 10px;
+    min-height: 90vh;
+    position: sticky;
+    top: 0;
+    right: 0;
+    border-left: 1px solid var(--border-light-color);
+}
+#chatlist h3{
+    font-size: 1.2em;
+    border-bottom: 1px solid var(--border-light-color);
+    padding: 5px 0px;
+}
+#chatcard{
+    position: relative;
+    padding: 10px 5px;
+    border-top: 1px solid var(--border-light-color);
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+#chatcard:first-child{
+    border: 0;
+}
+#chatcard:hover{
+    background: var(--border-light-color);
+}
+#chatcard img{
+    width: 30px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+#chatcard > *{
+    display: inline-block;
+    margin: 0;
+}
+#useronline{
+    padding: 5px;
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    border-radius: 50%;
+    background: #d3d3d3;
+}
+#useronline.online{
+    background: #49e669;
+}

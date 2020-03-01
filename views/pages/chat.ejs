@@ -1,0 +1,46 @@
+<div id="chatcontainer">
+    <div id="chatbox">
+        <h3>Username</h3>
+        <div id="realchat">
+            <div class="mymsgs msgs"><p>Ayee</p></div>
+            <div class="othersmsgs msgs"><p>Hiii</p></div>
+            <div class="mymsgs msgs"><p>Heyy how are you doing? Heyy how are you doing? Heyy how are you doing?</p></div>
+        </div>
+        <div id="sendmsgs">
+            <input type="text" id="newmsg" placeholder="Enter a Message...">
+            <button id="sendnewmsg">Send</button>
+        </div>
+    </div>
+    <div id="chatlist">
+        <h3>Connected People List</h3>
+        <div id="chatnamesdiv">
+            <div id="chatcard">
+                <img src="/images/profile.png" alt="Profile Photo">
+                <p id="chatusername">User 1</p>
+                <span id="useronline" class="online"></span>
+            </div>
+            <div id="chatcard">
+                <img src="/images/profile.png" alt="Profile Photo">
+                <p id="chatusername">User 1</p>
+                <span id="useronline" class="online"></span>
+            </div>
+            <div id="chatcard">
+                <img src="/images/profile.png" alt="Profile Photo">
+                <p id="chatusername">User 1</p>
+                <span id="useronline"></span>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    function setmsgwidth(){
+        var cwidth = $('#chatbox').width();
+        $('#sendmsgs').width(cwidth);
+    }
+    $(document).ready(function(){
+        setmsgwidth();
+        $(window).resize(function(){
+            setmsgwidth();
+        });
+    });
+</script>
