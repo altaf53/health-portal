@@ -1,6 +1,15 @@
 <div id="chatcontainer">
     <div id="chatbox">
-        <h2>Chatbox</h2>
+        <h3>Username</h3>
+        <div id="realchat">
+            <div class="mymsgs msgs"><p>Ayee</p></div>
+            <div class="othersmsgs msgs"><p>Hiii</p></div>
+            <div class="mymsgs msgs"><p>Heyy how are you doing? Heyy how are you doing? Heyy how are you doing?</p></div>
+        </div>
+        <div id="sendmsgs">
+            <input type="text" id="newmsg" placeholder="Enter a Message...">
+            <button id="sendnewmsg">Send</button>
+        </div>
     </div>
     <div id="chatlist">
         <h3>Connected People List</h3>
@@ -23,3 +32,15 @@
         </div>
     </div>
 </div>
+<script>
+    function setmsgwidth(){
+        var cwidth = $('#chatbox').width();
+        $('#sendmsgs').width(cwidth);
+    }
+    $(document).ready(function(){
+        setmsgwidth();
+        $(window).resize(function(){
+            setmsgwidth();
+        });
+    });
+</script>
