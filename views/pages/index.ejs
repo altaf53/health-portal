@@ -31,9 +31,16 @@
                 <button class="searchbutton" id="blog" >Ask A Question</button>
             </div>
             <div class="maincontent" id="maincontent">
-                <%- include("./homepage") -%>
+                    
         </div>
     </div>
     <script src="/js/index.js"></script>
+    <script>
+        $(document).ready(function() {
+            
+            $('#maincontent').load("homepage");
+
+            });
+    </script>
 </body>
 </html>

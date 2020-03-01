@@ -61,7 +61,19 @@ app.get('/', function (req, res) {
 });
 app.get('/homepage', function (req, res) {
     // res.redirect('/');
-    res.render('pages/homepage', { title: "check session type" });
+    Blog.find({
+        },function(error, result){
+            if(error){
+                console.log(error);
+            }
+            console.log(result)
+            console.log(result[1].tags.toString())
+            tags = result[1].tags.toString()
+            tags = tags.split(', ')
+            console.log(tags)
+            res.render('pages/homepage', { result: result, tags: tags });
+        });
+    
 });
 app.get('/login', function (req, res) {
     // res.redirect('/');
