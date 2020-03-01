@@ -2,10 +2,10 @@ var navbar = $('nav');
 function setsearchpostion(){
     $('#qna').css('top', (navbar.height()+11)+"px");
 }
-window.addEventListener('load', () => {
+// window.addEventListener('load', () => {
     
-    registerSW();
-  });
+//     registerSW();
+//   });
 $(document).ready(function(){
     
     setsearchpostion();

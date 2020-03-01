@@ -16,6 +16,7 @@ const mongoose = require('mongoose');
 const User = require('./models/User');
 const TestScore = require('./models/TestScore');
 const Blog = require('./models/Blog');
+const Comment = require('./models/Comment');
 const dotenv = require('dotenv').config();
 const saltRounds = 10;
 var datetime = new Date();
@@ -66,11 +67,8 @@ app.get('/homepage', function (req, res) {
             if(error){
                 console.log(error);
             }
-            console.log(result)
-            console.log(result[1].tags.toString())
             tags = result[1].tags.toString()
             tags = tags.split(', ')
-            console.log(tags)
             res.render('pages/homepage', { result: result, tags: tags });
         });
     
@@ -106,8 +104,16 @@ app.get('/question/:quesid', function (req, res) {
         if(error){
             console.log(error);
         }
+        if(result){
+            Comment.find({
+                userId:quesid
+            },function(error, cresult){
+                if(error){console.log(error)}
+                res.render('pages/question', { user_name: req.session.username, result: result, cresult:cresult});
+            }
+            )
+        }
         
-        res.render('pages/question', { user_name: req.session.username, result: result});
     });
 
 });
@@ -128,8 +134,28 @@ app.get('/chat', function (req, res) {
 
 
 
+//post for comment
+app.post('/add_cmmnt', function (req, res) {
+    let mssg = req.body.newcomment;
+    let quesid1 = req.body.quesid1;
+    try {
+        var cmmnt = new Comment({
+            message:mssg,
+            createdBy:req.session.username,
+            userId:quesid1
+        });
+        cmmnt.save(function(err){
+            if(err){
+                console.log(err);
+            }
 
+        res.send("succes");
 
+        });
+    } catch (error) {
+        console.log(error);
+    }
+})
 
 
 
@@ -208,7 +234,6 @@ app.post('/point_submit', function (req, res) {
 // post for blog entry
 app.post('/post_blog', function (req, res) {
     try {
-        console.log("helo " + req.session.user_type)
         var blog = new Blog({
             title: req.body.title,
             tags: req.body.tags,

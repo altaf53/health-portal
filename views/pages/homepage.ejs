@@ -11,7 +11,7 @@
             <p class="questiondesc">
                 <%= result.description %>
             </p>
-            <p id="quesid"><%= result._id %></p>
+            <p id="quesid" hidden><%= result._id %></p>
             <p class="tags">
                 <% for (var i = 0; i < tags.length; i++) { %>
                 <span class="tag"><%= tags[i] %></span>

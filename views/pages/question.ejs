@@ -8,6 +8,7 @@
         </div>
         
         <h4 id="questionheader"><%= result[0].title %></h4>
+        <p id="quesid1" hidden ><%= result[0]._id %></p>
     </div>
     <div id="questiondesc">
         <div id="questioncontent">
@@ -35,9 +36,10 @@
         </div>
     </div>
     <div id="commentsdiv">
+        <% cresult.forEach((cresult)=>{ %>
         <div class="commentcard">
-            <p class="commentor"><a href="">Commentor Username</a><span class="commentorverified">Verified Account</span></p>
-            <p class="commentcontent">Comment Content here</p>
+            <p class="commentor"><a href=""><%= cresult.createdBy %></a></p>
+            <p class="commentcontent"><%= cresult.message %></p>
             <div class="commentoptionsdiv">
                 <p class="commentoption">
                     <span class="commentstatvalue">10</span>
@@ -46,17 +48,8 @@
                 <p class="commentoption" id="replycomment">Reply</p>
             </div>
         </div>
-        <div class="commentcard">
-            <p class="commentor"><a href="">Commentor Username</a><span class="commentorverified">Verified Account</span></p>
-            <p class="commentcontent">Comment Content here</p>
-            <div class="commentoptionsdiv">
-                <p class="commentoption">
-                    <span class="commentstatvalue">10</span>
-                    <span class="commentstatname">Likes</span>
-                </p>
-                <p class="commentoption" id="replycomment">Reply</p>
-            </div>
-        </div>
+        <% }) %>
+        
     </div>
 </div>
 <script>
@@ -76,6 +69,34 @@
             $('#addcomment').fadeIn(500);
             $('#newcomment').val('@'+u+' ').focus();
             $(window).scrollTop($('#addcomment').position().top);
+        });
+    });
+
+    $(document).ready(function(){
+        $("#postcomment").on('click',function(e){
+            e.preventDefault();
+            let newcomment = $("#newcomment").val();
+            let url = "/add_cmmnt";
+            let quesid1 = $("#quesid1").text();
+            $.post(url,{newcomment:newcomment , quesid1:quesid1}).done(function(data){
+                        if(data = "succes"){
+                            $.ajax({
+                                url: '/question/'+quesid1+'',
+                                type: 'GET',
+                                cache: false,
+                            }).done(function(result){
+                                $('#maincontent').html(result);
+                            });
+                        }
+                        else if('unsucces'){
+                            swal({
+                                title: "Registration Unsuccessful!",
+                                text: "Please Retry Later",
+                                icon: "error",
+                                });
+                        }else{}
+                    });
+
         });
     });
 </script>
