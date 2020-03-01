@@ -3,21 +3,16 @@
         <div id="questionasker">
             <a href="">
                 <img src="/images/profile.png" alt="Avatar" class="avatar">
-                <p>anonymous_123456</p>
+                <p><%= user_name %></p>
             </a>
         </div>
-        <h4 id="questionheader">Question Title Here?</h4>
+        
+        <h4 id="questionheader"><%= result[0].title %></h4>
     </div>
     <div id="questiondesc">
         <div id="questioncontent">
             <p>
-                Question Expanded here <br>
-                Lorem, ipsum dolor sit amet consectetur adipisicing elit. <br>
-                Dolore odit minus praesentium voluptatum! Nemo id accusantium aliquid ullam veniam maxime quis. <br>
-                Doloribus quos impedit aspernatur veritatis ipsum odio totam nulla. <br>
-                Lorem, ipsum dolor sit amet consectetur adipisicing elit. <br>
-                Dolore odit minus praesentium voluptatum! Nemo id accusantium aliquid ullam veniam maxime quis. <br>
-                Doloribus quos impedit aspernatur veritatis ipsum odio totam nulla. <br>
+                <%= result[0].description %>
             </p>
         </div>
         <div id="questionoptionsdiv">

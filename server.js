@@ -97,9 +97,19 @@ app.get('/anxiety', function (req, res) {
     // res.redirect('/');
     res.render('pages/anxiety');
 });
-app.get('/question', function (req, res) {
+app.get('/question/:quesid', function (req, res) {
     // res.redirect('/');
-    res.render('pages/question');
+    let quesid = req.params.quesid;
+    Blog.find({
+        _id: quesid
+    },function(error, result){
+        if(error){
+            console.log(error);
+        }
+        
+        res.render('pages/question', { user_name: req.session.username, result: result});
+    });
+
 });
 
 

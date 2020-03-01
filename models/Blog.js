@@ -13,7 +13,7 @@ const blogSchema = new mongoose.Schema({
     type: String
   },
   createdBy: {
-    type: String
+    type: String 
   },
   createdAt: {
     type: Date,
