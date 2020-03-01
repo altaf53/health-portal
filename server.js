@@ -2,12 +2,16 @@ var port = process.env.PORT || 3000;
 var session = require('express-session');
 const express = require('express');
 const path = require('path');
+const Message = require('./models/Message');
+const logger = require('morgan');
 // const mysql = require('mysql');
 const bodyParser = require('body-parser');
 // const mysqlBackbone = require('mysql-backbone');
 const multer = require('multer');
 const fs = require("fs")
 const app = express();
+const server = require('http').createServer(app);
+const io = require('socket.io').listen(server);
 const dateTime = require('date-time');
 const bcrypt = require('bcrypt');
 var session = require('express-session');
@@ -20,6 +24,7 @@ const dotenv = require('dotenv').config();
 const saltRounds = 10;
 var datetime = new Date();
 var today_date = datetime.toISOString().slice(0, 10);
+let users = {};
 //joining path of directory 
 const directoryPath = path.join(__dirname, 'public/uploads');
 mongoose.connect("mongodb+srv://altaf:Ilafatla@cluster0-hgkj6.mongodb.net/test?retryWrites=true&w=majority", {
@@ -34,30 +39,94 @@ mongoose.connect("mongodb+srv://altaf:Ilafatla@cluster0-hgkj6.mongodb.net/test?r
         console.log("Something went wrong", err);
     })
 //memory leak issue solving line and session creation
-var MemoryStore = require('memorystore')(session)
+const MongoDBStore = require('connect-mongodb-session')(session);
+
+
+const store = new MongoDBStore({
+    uri: "mongodb+srv://altaf:Ilafatla@cluster0-hgkj6.mongodb.net/test?retryWrites=true&w=majority"
+})
 
 //setting view engine to ejs, to able to render ejs files
 app.set('view engine', 'ejs');
 app.use(express.static(__dirname + "/views"));
 // app.use(express.cookieParser());
+app.use(logger('dev'));
 app.use(session({
     cookie: { maxAge: 86400000 },
-    store: new MemoryStore({
-      checkPeriod: 86400000 // prune expired entries every 24h
-    }),
+    store: store,
     resave: false,
     saveUninitialized: false,
     secret: 'sies docs'
-  }))
+}))
 //including public folder for accessing files present in public folder
 app.use(express.static(__dirname + "/public"));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
+io.sockets.on('connection', function (socket) {
+    console.log('a user connected');
+    socket.on('new', function (data, callback) {
+        console.log(data.name);
+        if (data in users) {
+            callback(false);
+        } else {
+            callback(true);
+            socket.name = data.name;
+            users[socket.name] = socket;
+        }
+    });
+
+    socket.on('msg', function (data) {
+        console.log(data);
+        msg = data.msg + "~" + data.to;
+        console.log(data, "msg");
+        let message = new Message({
+            name: data.to,
+            message: data.msg
+        });
+        message.save((err) => {
+            if (err) {
+                console.log(err);
+            } else {
+                // io.emit('message', req.body);
+                console.log("Successful");
+
+            }
+        })
+
+        io.to(users[data.to].emit('priv', msg));
+    })
+
+
+    socket.on('disconnect', function () {
+        console.log('user disconnected');
+    });
+});
+
+
+app.get('/messages', (req, res) => {
+    Message.find({}, (err, messages) => {
+        res.send(messages);
+    })
+});
+
+app.post('/messages', (req, res) => {
+    // console.log(req.body);
+    let message = new Message(req.body);
+    message.save((err) => {
+        if (err) {
+            sendStatus(500);
+        } else {
+            // io.emit('message', req.body);
+            console.log(req.body, "bod");
+            res.sendStatus(200);
+        }
+    })
+})
 //Setting the homepage or start page Route
 app.get('/', function (req, res) {
     // res.redirect('/');
-    res.render('pages/index', { title: "Online-Portal" });
+    res.render('pages/index', { title: "Online-Portal", user: req.session });
 });
 app.get('/homepage', function (req, res) {
     // res.redirect('/');
@@ -65,13 +134,13 @@ app.get('/homepage', function (req, res) {
 });
 app.get('/login', function (req, res) {
     // res.redirect('/');
-    res.render('pages/login');
+    res.render('pages/login', { user: req.session });
 });
 
 
 app.get('/register', function (req, res) {
     // res.redirect('/');
-    res.render('pages/register');
+    res.render('pages/register', { userid: req.session.userid });
 });
 app.get('/blog', function (req, res) {
     // res.redirect('/');
@@ -101,7 +170,15 @@ app.get('/alzheimer', function (req, res) {
 });
 app.get('/chat', function (req, res) {
     // res.redirect('/');
-    res.render('pages/chat');
+    User.find({}, function (err, users) {
+        if (err) {
+            console.log(err);
+            return next(err);
+        }
+        // console.log(users);
+        res.render('pages/chat', { users, session: req.session });
+
+    })
 });
 
 
@@ -133,7 +210,7 @@ app.post('/register_user', function (req, res) {
         console.log(error);
         res.send("unsucces");
     }
-    
+
 });
 
 //Post for login
@@ -141,28 +218,29 @@ app.post('/login_submit', function (req, res) {
     try {
         User.find({
             name: req.body.user_name
-        },function(error, result){
-            if(error){
+        }, function (error, result) {
+            if (error) {
                 console.log(error);
             }
-            
+
             var compare = bcrypt.compareSync(req.body.userpassword, result[0].password);
-            
-            if(compare == true){
+
+            if (compare == true) {
                 console.log(result[0].user_type)
-                
-                
-                req.session.user_type = result[0].user_type;
+
+
+
                 req.session.userid = result[0]._id.toString();
-                req.session.email_id = result[0].email_id;
                 req.session.username = result[0].name;
+                req.session.user_type = result[0].user_type;
+                res.locals.user_type = result[0].user_type;
+                res.locals.userid = result[0]._id.toString();
                 // req.session.img = result[0].imagePath;
                 // req.session.gender = result[0].gender;
-                req.session.diagonsedWith = result[0].diagonsedWith;
-                req.session.tags = result[0].tags;
-                res.send("Login Successful")
+                res.send("Login Successful");
+                console.log(req.session);
             }
-            
+
         });
     } catch (error) {
         console.log(error);
@@ -193,15 +271,23 @@ app.post('/post_blog', function (req, res) {
             description: req.body.description,
             createdBy: req.session.username,
             userId: req.session.userid,
-            user_type:req.session.user_type
+            user_type: req.session.user_type
         });
         blog.save();
         res.send("success");
-        
+
     } catch (error) {
         console.log(error);
     }
 });
-app.listen(port, function () {
+
+
+app.get('/logout', (req, res) => {
+    req.session.destroy();
+    res.redirect('/');
+});
+
+
+server.listen(port, function () {
     console.log('Listening at port 3000');
 });

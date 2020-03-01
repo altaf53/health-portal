@@ -5,7 +5,7 @@
     <div>
         <ul id="navbarul">
             <!-- if user session set -->
-            <li><a href="#">Notifications</a></li>
+
             <!-- <div class="submenu">
                 <ul id="subul">
                     <li><a href="#">View Profile</a></li>
@@ -14,8 +14,14 @@
                 </ul>
             </div> -->
             <!-- if not set -->
+            <%if(!user.userid ){%>
             <li><a href="/login">Login</a></li>
             <li><a href="/register">Register</a></li>
+            <%}else{%>
+            <li><a href="#">Notifications</a></li>
+            <li><a href="/logout">Logout</a></li>
+            <%}%>
+
         </ul>
     </div>
 </nav>

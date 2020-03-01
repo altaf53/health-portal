@@ -1,30 +1,26 @@
 var navbar = $('nav');
-function setsearchpostion(){
-    $('#qna').css('top', (navbar.height()+11)+"px");
+function setsearchpostion() {
+    $('#qna').css('top', (navbar.height() + 11) + "px");
 }
-window.addEventListener('load', () => {
-    
-    registerSW();
-  });
-$(document).ready(function(){
-    
+$(document).ready(function () {
+
     setsearchpostion();
-    $('.sidebar li a, .sidebar button').click(function(){
+    $('.sidebar li a, .sidebar button').click(function () {
         var divid = $(this).attr('id');
         $.ajax({
-            url: '/'+divid,
+            url: '/' + divid,
             type: 'GET',
             cache: false,
-        }).done(function(result){
+        }).done(function (result) {
             $('#maincontent').html(result);
         });
     });
-    $('.questioncard a').click(function(){
+    $('.questioncard a').click(function () {
         $.ajax({
             url: '/question',
             type: 'GET',
             cache: false,
-        }).done(function(result){
+        }).done(function (result) {
             $('#maincontent').html(result);
         });
     });

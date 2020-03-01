@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
@@ -12,29 +13,36 @@
     <link href="/css/chat.css" rel="stylesheet">
     <link href="/css/question.css" rel="stylesheet">
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-    
+
 </head>
+
 <body>
-    <!--  -->
     <div id="container">
-        <%- include("../partials/nav") -%>
+        <%- include('../partials/nav') -%>
         <div id="main">
-           
+
             <div class="sidebar">
                 <ul id="sidebarul">
-                    <h3 id="username">Username</h3>
+                    <h3 id="username"><%=user.username%></h3>
                     <li><a id="homepage">Home</a></li>
                     <li><a id="courses">Courses</a></li>
                     <li><a id="anxiety">Track Your Health</a></li>
                     <li><a id="tags">Tags</a></li>
                     <li><a id="chat">Chat</a></li>
                 </ul>
-                <button class="searchbutton" id="blog" >Ask A Question</button>
+                <% if(locals.userid){%>
+                <%if(locals.user_type==="user"){%>
+                <button class="searchbutton" id="blog">Ask A Question</button>
+                <%}else{%>
+                <button class="searchbutton" id="blog">Write An Article</button>
+                <%}%>
+               <% } %>
             </div>
             <div class="maincontent" id="maincontent">
                 <%- include("./homepage") -%>
+            </div>
         </div>
-    </div>
-    <script src="/js/index.js"></script>
+        <script src="/js/index.js"></script>
 </body>
+
 </html>

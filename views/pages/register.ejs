@@ -10,9 +10,9 @@
 </head>
 
 <body>
-   
+
     <div id="formdiv">
-        <form  class="forms" name="RegForm" id="registerform">
+        <form class="forms" name="RegForm" id="registerform">
             <h2 class="full">Register</h2>
             <label for="username">Username</label>
             <input type="text" name="user_name" placeholder="Enter a username..." id="user_name">
@@ -48,73 +48,69 @@
             <a href="./">&#x21E6; Back to Home</a>
         </form>
     </div>
-     <script type="text/javascript">
-        
-        function validateData(){
+    <script type="text/javascript">
+
+        function validateData() {
             var flag = true;
             var user_name = document.RegForm.user_name.value;
-            var u_email_id=document.RegForm.u_email_id.value;
+            var u_email_id = document.RegForm.u_email_id.value;
             var mobileno = document.RegForm.mobileno.value;
-            var tags =document.RegForm.tags.value;
-            var diagnosed =document.RegForm.diagnosed.value;
-             var password = document.RegForm.userpassword.value;
-             var password_confirm = document.RegForm.comfirmpassword.value;
-             var v = $('#accounttype').val();
+            var tags = document.RegForm.tags.value;
+            var diagnosed = document.RegForm.diagnosed.value;
+            var password = document.RegForm.userpassword.value;
+            var password_confirm = document.RegForm.comfirmpassword.value;
+            var v = $('#accounttype').val();
             // var decimal=  /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{8,15}$/;
 
-            var check=[];
+            var check = [];
 
-            if(user_name==""){
+            if (user_name == "") {
                 check.push('User Name Required')
             }
-            if(/^(\+\d{1,3}[- ]?)?\d{10}$/.test(mobileno)== false){
-                check.push(' Mobile Number Invalid/Required')   
+            if (/^(\+\d{1,3}[- ]?)?\d{10}$/.test(mobileno) == false) {
+                check.push(' Mobile Number Invalid/Required')
             }
-            if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(u_email_id) == false){
+            if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(u_email_id) == false) {
                 check.push(' Email Invalid/Required')
             }
-            
-            if(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{8,15}$/.test(password) == false){
+
+            if (/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{8,15}$/.test(password) == false) {
                 check.push('Your password must contain atleast one uppercase, one lowercase, one numeric, one special character and should have minimum 8 characters ')
             }
-            if(password !== password_confirm){
+            if (password !== password_confirm) {
                 check.push(' Password do not match ')
 
             }
-            if(tags==""){
-                check.push('Atleast one Tag is Required')  
+            if (tags == "") {
+                check.push('Atleast one Tag is Required')
             }
-            if(v== "user"){
-            if(diagnosed==""){
-                check.push('diagnosed Required')
+            if (v == "user") {
+                if (diagnosed == "") {
+                    check.push('diagnosed Required')
+                }
             }
-        }
-            
-            
-            if(check.length > 0){
+
+
+            if (check.length > 0) {
                 swal({
                     title: "Invalid Input",
-                    text:check.join( '\n'),
+                    text: check.join('\n'),
                     icon: "warning"
-                    
-                  })
+
+                })
                 //   check = [];
                 console.log(check)
-                flag=false;
-      }
+                flag = false;
+            }
             return flag;
         }
     </script>
     <script>
-        $(document).ready(function(){
-            $("#register_").on('click',function(e){
+        $(document).ready(function () {
+            $("#register_").on('click', function (e) {
                 e.preventDefault();
-                if(validateData() == true){
-<<<<<<< HEAD
-                    
-=======
-                    console.log("errro");
->>>>>>> 0a022efd5cb1ccdc265ebc32232a85e688b20894
+                if (validateData() == true) {
+
                     let user_name = $("#user_name").val();
                     let u_email_id = $("#u_email_id").val();
                     let userpassword = $("#userpassword").val();
@@ -124,55 +120,54 @@
                     let user_type = $("#accounttype").val();
                     alert(user_type);
                     let url = "/register_user"
-                    $.post(url,{user_name:user_name, u_email_id:u_email_id, userpassword:userpassword, mobileno:mobileno, tags:tags, diagnosed:diagnosed, user_type:user_type}).done(function(data){
-                        if(data == "succes"){
+                    $.post(url, { user_name: user_name, u_email_id: u_email_id, userpassword: userpassword, mobileno: mobileno, tags: tags, diagnosed: diagnosed, user_type: user_type }).done(function (data) {
+                        if (data == "succes") {
                             swal({
                                 title: "Registration Successful!",
                                 text: "Login to Continue",
                                 icon: "success",
-                                }).then(function(){
-                                    window.location = '/login';
-                                });
+                            }).then(function () {
+                                window.location = '/login';
+                            });
                         }
-                        else if('unsucces'){
+                        else if ('unsucces') {
                             swal({
                                 title: "Registration Unsuccessful!",
                                 text: "Please Retry Later",
                                 icon: "error",
-                                });
-                        }else{}
+                            });
+                        } else { }
                     });
-                }else{
-                    e.preventDefault(); 
-                    console.log(error);
+                } else {
+                    e.preventDefault();
                 }
             });
         });
-            </script>
-            
+    </script>
+
     <script>
-        function setusertype(t){
+        function setusertype(t) {
             var v = t.val();
-            if(v == "user"){
+            if (v == "user") {
                 $('#diagnosed').show().prev().show();
                 $('#certificate').hide().prev().hide();
             }
-            else if(v == "doctor"){
+            else if (v == "doctor") {
                 $('#certificate').show().prev().show();
                 $('#diagnosed').hide().prev().hide();
             }
         }
-        $(document).ready(function(){
-            $('#tags').on('input', function(){
+        $(document).ready(function () {
+            $('#tags').on('input', function () {
                 var v = this.value;
-                if($('#taglist option').filter(function(){
-                    return this.value.toUpperCase() === v.toUpperCase();        
-                }).length){
-                    var str = '<div class="alert alert-warning alert-dismissible fade show tagspan" role="alert"><span>'+v+'</span><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>';
+                if ($('#taglist option').filter(function () {
+                    return this.value.toUpperCase() === v.toUpperCase();
+                }).length) {
+                    var str = '<div class="alert alert-warning alert-dismissible fade show tagspan" role="alert"><span>' + v + '</span><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>';
                     $('#selectedtags').append(str);
                 }
             });
-            $('#tags').click(function(){
+            $('#tags').click(function () {
                 $(this).select();
             });
         });
