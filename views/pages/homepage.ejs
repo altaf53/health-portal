@@ -3,39 +3,39 @@
     <button class="searchbutton">Search</button>
 </div>
 <div id="results">
-    <div class="questioncard paddeddivs">
-        <a id="/question">
-            <p class="questionheader">Question 1?</p>
+    
+        <% result.forEach((result)=>{ %>
+        <div class="questioncard paddeddivs">
+        <a id="question">
+            <p class="questionheader"><%= result.title %></p>
             <p class="questiondesc">
-                Question description Lorem ipsum dolor sit amet consectetur adipisicing elit. Illum 
-                Question description Lorem ipsum dolor sit amet consectetur adipisicing elit. Illum 
+                <%= result.description %>
             </p>
-            <p class="tags"><span class="tag">Depression</span><span class="tag">Sad</span></p>
+            <p id="quesid" hidden><%= result._id %></p>
+            <p class="tags">
+                <% for (var i = 0; i < tags.length; i++) { %>
+                <span class="tag"><%= tags[i] %></span>
+            <% } %>
+        </p>
         </a>
     </div>
-    <div class="questioncard paddeddivs">
-        <a id="/question">
-            <p class="questionheader">Question 2?</p>
-            <p class="questiondesc">Question description Lorem ipsum dolor sit amet consectetur adipisicing elit. Illum </p>
-            <p class="tags"><span class="tag">tag1</span><span class="tag">Anxiety</span></p>
-        </a>
-    </div>
-    <div class="questioncard paddeddivs">
-        <a id="">
-            <p class="questionheader">Post 1</p>
-            <p class="questiondesc">Post description Lorem ipsum dolor sit amet consectetur adipisicing elit. Illum </p>
-            <p class="tags"><span class="tag">treatment</span><span class="tag">Alzheimer</span><span class="tag">Forgetting</span></p>
-        </a>
-    </div>
-    <div class="questioncard paddeddivs">
-        <a id="">
-            <p class="questionheader">Question 3?</p>
-            <p class="questiondesc">Question description Lorem ipsum dolor sit amet consectetur adipisicing elit. Illum </p>
-            <p class="tags"><span class="tag">Stress</span><span class="tag">Alzheimer</span><span class="tag">Forgetting</span></p>
-        </a>
-    </div>
+        <% }) %>
+    
+    
     <br><br><br><br><br><br><br><br><br><br><br>
     <br><br><br><br><br><br><br><br><br><br><br>
     <br><br><br><br><br><br><br><br><br><br><br>
 </div>
 </div>
+<script>
+    $('.questioncard a').click(function(){
+        let quesid = $(this).find("#quesid").text();
+        $.ajax({
+            url: '/question/'+quesid+'',
+            type: 'GET',
+            cache: false,
+        }).done(function(result){
+            $('#maincontent').html(result);
+        });
+    });
+</script>

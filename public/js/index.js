@@ -15,6 +15,7 @@ $(document).ready(function () {
             $('#maincontent').html(result);
         });
     });
+<<<<<<< HEAD
     $('.questioncard a').click(function () {
         $.ajax({
             url: '/question',
@@ -24,4 +25,7 @@ $(document).ready(function () {
             $('#maincontent').html(result);
         });
     });
+=======
+
+>>>>>>> e1fb5a165c4d1f1d6723749ead945b4d212f116b
 });

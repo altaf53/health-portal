@@ -3,21 +3,17 @@
         <div id="questionasker">
             <a href="">
                 <img src="/images/profile.png" alt="Avatar" class="avatar">
-                <p>anonymous_123456</p>
+                <p><%= user_name %></p>
             </a>
         </div>
-        <h4 id="questionheader">Question Title Here?</h4>
+        
+        <h4 id="questionheader"><%= result[0].title %></h4>
+        <p id="quesid1" hidden ><%= result[0]._id %></p>
     </div>
     <div id="questiondesc">
         <div id="questioncontent">
             <p>
-                Question Expanded here <br>
-                Lorem, ipsum dolor sit amet consectetur adipisicing elit. <br>
-                Dolore odit minus praesentium voluptatum! Nemo id accusantium aliquid ullam veniam maxime quis. <br>
-                Doloribus quos impedit aspernatur veritatis ipsum odio totam nulla. <br>
-                Lorem, ipsum dolor sit amet consectetur adipisicing elit. <br>
-                Dolore odit minus praesentium voluptatum! Nemo id accusantium aliquid ullam veniam maxime quis. <br>
-                Doloribus quos impedit aspernatur veritatis ipsum odio totam nulla. <br>
+                <%= result[0].description %>
             </p>
         </div>
         <div id="questionoptionsdiv">
@@ -26,7 +22,7 @@
                 <span class="statname"><img src="/images/upvote.png" alt="Upvote/Like"></span>
             </p>
             <p class="questionoption" id="postnewcomment">
-                <span class="statvalue">25</span>
+                <span class="statvalue">1</span>
                 <span class="statname">Comments</span>
             </p>
             <span class="questionoption" id="report">Report</span>
@@ -40,9 +36,10 @@
         </div>
     </div>
     <div id="commentsdiv">
+        <% cresult.forEach((cresult)=>{ %>
         <div class="commentcard">
-            <p class="commentor"><a href="">Commentor Username</a><span class="commentorverified">Verified Account</span></p>
-            <p class="commentcontent">Comment Content here</p>
+            <p class="commentor"><a href=""><%= cresult.createdBy %></a></p>
+            <p class="commentcontent"><%= cresult.message %></p>
             <div class="commentoptionsdiv">
                 <p class="commentoption">
                     <span class="commentstatvalue">10</span>
@@ -51,17 +48,8 @@
                 <p class="commentoption" id="replycomment">Reply</p>
             </div>
         </div>
-        <div class="commentcard">
-            <p class="commentor"><a href="">Commentor Username</a><span class="commentorverified">Verified Account</span></p>
-            <p class="commentcontent">Comment Content here</p>
-            <div class="commentoptionsdiv">
-                <p class="commentoption">
-                    <span class="commentstatvalue">10</span>
-                    <span class="commentstatname">Likes</span>
-                </p>
-                <p class="commentoption" id="replycomment">Reply</p>
-            </div>
-        </div>
+        <% }) %>
+        
     </div>
 </div>
 <script>
@@ -81,6 +69,34 @@
             $('#addcomment').fadeIn(500);
             $('#newcomment').val('@'+u+' ').focus();
             $(window).scrollTop($('#addcomment').position().top);
+        });
+    });
+
+    $(document).ready(function(){
+        $("#postcomment").on('click',function(e){
+            e.preventDefault();
+            let newcomment = $("#newcomment").val();
+            let url = "/add_cmmnt";
+            let quesid1 = $("#quesid1").text();
+            $.post(url,{newcomment:newcomment , quesid1:quesid1}).done(function(data){
+                        if(data = "succes"){
+                            $.ajax({
+                                url: '/question/'+quesid1+'',
+                                type: 'GET',
+                                cache: false,
+                            }).done(function(result){
+                                $('#maincontent').html(result);
+                            });
+                        }
+                        else if('unsucces'){
+                            swal({
+                                title: "Registration Unsuccessful!",
+                                text: "Please Retry Later",
+                                icon: "error",
+                                });
+                        }else{}
+                    });
+
         });
     });
 </script>
